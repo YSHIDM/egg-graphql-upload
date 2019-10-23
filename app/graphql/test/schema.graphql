@@ -1,0 +1,29 @@
+# 权限
+type Permission {
+  # 权限id
+  id: String
+  # 权限名称，对应页面路由
+  title: String
+  # 权限英文名称，对应页面元素id等
+  name: String
+  # 权限顺序，二进制中的位数
+  code: Int
+  # 权限父id
+  parentId: String
+  # 权限状态，根据角色权限值分配，数据库中不存在
+  state: Int
+}
+# 权限状态
+input PermissionState {
+  # 权限编码
+  code: Int!
+  # 权限状态
+  state: Int!
+}
+# 权限管理-静态，没有状态
+type Res {
+  # 返回码
+  rescode: String
+  # 返回信息
+  resmessage: String
+}
