@@ -22,4 +22,8 @@ npm run dev
 使用Altair 工具测试上传文件，使用方式见官方文档，填写路径 127.0.0.1:7002 访问singleUpload 接口（因为是框架测试，所以只有该接口可以正常使用）。
 填写路径 127.0.0.1:7002/graphql 访问其他接口。
 
+127.0.0.1:7002
 ![use altair](/doc/use_altair.png)
+
+127.0.0.1:7002/graphql
+![use altair2](/doc/use_altair2.png)
