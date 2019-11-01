@@ -11,9 +11,7 @@ exports.QueryType = new GraphQLObjectType({
       type: GraphQLNonNull(GraphQLList(GraphQLNonNull(FileType))),
       resolve: async (source, args, { db }) => {
         // db.get('uploads').value()
-        console.log(source, args, db);
         const file = await fsp.readFile(__filename);
-        console.log('file', file.toString());
 
         return fsp.readFile(__filename);
       },

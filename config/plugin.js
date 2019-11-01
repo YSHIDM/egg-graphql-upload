@@ -10,4 +10,12 @@ module.exports = {
     enable: true,
     package: 'egg-graphql',
   },
+  ejs: {
+    enable: true,
+    package: 'egg-view-ejs',
+  },
+  sequelize: {
+    enable: true,
+    package: 'egg-sequelize',
+  },
 };

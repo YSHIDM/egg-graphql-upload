@@ -14,7 +14,6 @@ const {
 
 const graphqlServer = (apollo, dependencies = {}) => {
   const setHeadersFromObject = (obj, ctx) => {
-    console.log('ctx.request["content-type"]', ctx.request['content-type']);
     if (ctx.request['content-type'] && !ctx.request['content-type'].startsWith('multipart/form-data; boundary')) {
       return;
     }
@@ -38,16 +37,6 @@ const graphqlServer = (apollo, dependencies = {}) => {
   } = dependencies;
 
   return async (ctx, next) => {
-    console.log('koa-middleware-apollo', ctx.req.headers['content-type']);
-    // console.log('ctx', ctx);
-    // console.log(
-    //   getQuery.toString(),
-    //   `
-
-
-    // `,
-    //   // await getQuery(ctx)
-    //   );
     try {
       const { graphqlResponse, responseInit } = await runQuery([ ctx ], {
         options: await getOptions(ctx),
@@ -59,7 +48,6 @@ const graphqlServer = (apollo, dependencies = {}) => {
       setHeadersFromObject(responseInit, ctx);
 
       ctx.body = graphqlResponse;
-      // console.log('graphqlResponse', graphqlResponse)
     } catch (e) {
       if (e.name !== 'HttpQueryError') {
         throw e;

@@ -19,11 +19,9 @@ exports.MutationType = new GraphQLObjectType({
         },
       },
       resolve: async (parent, { file }) => {
-        console.log(file);
         const f = await Promise.all(file);
         const filePath = path.join(__dirname, '../../../../images/', f[0].filename);
         f[0].createReadStream().pipe(fs.createWriteStream(filePath));
-        console.log('ok');
         return {
           id: '1',
           path: filePath,
