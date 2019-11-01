@@ -13,7 +13,8 @@
 
 ## 现状
 1. egg-graphql提供接口路径为"/graphql"，koa-middleware-apollo 中间件提供接口路径在"/"，可以同时使用。
-
+### 2019-11-01
+1. 添加restful文件上传功能及文件数据处理单元测试
 ## 项目使用方式
 ```
 npm i
