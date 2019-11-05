@@ -32,7 +32,8 @@ module.exports = appInfo => {
     },
   };
   config.multipart = {
-    mode: 'file',
+    mode: 'stream',
+    fileModeMatch:/^\/images$/,
     fileSize: '5mb',
     tmpdir: path.join(appInfo.baseDir, '/images'),
     whitelist: [

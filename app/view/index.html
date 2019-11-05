@@ -29,5 +29,37 @@
                 </tr>
             </table>
         </form>
+        <form method="post" action="/imagesStream?_csrf={{ ctx.csrf | safe }}" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td><input type="file" name="logo"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="text" value="保存"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="保存"></td>
+                </tr>
+            </table>
+        </form>
+        <form method="post" action="/upload?_csrf={{ ctx.csrf | safe }}" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td><input type="file" name="logo"></td>
+                </tr>
+                <tr>
+                    <td><input type="file" name="logo"></td>
+                </tr>
+                <tr>
+                    <td><input type="file" name="logo"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="text" value="保存"></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="保存"></td>
+                </tr>
+            </table>
+        </form>
     </body>
 </html>
