@@ -24,7 +24,11 @@ module.exports = appInfo => {
   // 配置前端静态文件路径
   config.static = {
     prefix: '',
-    dir: [appInfo.baseDir + '/app/public/dist', appInfo.baseDir + '/images']
+    dir: [
+      appInfo.baseDir + '/app/public/dist',
+      appInfo.baseDir + '/images',
+      appInfo.baseDir + '/node_modules'
+    ]
   };
   config.view = {
     mapping: {
@@ -33,7 +37,7 @@ module.exports = appInfo => {
   };
   config.multipart = {
     mode: 'stream',
-    fileModeMatch:/^\/images$/,
+    fileModeMatch: /^\/images$/,
     fileSize: '5mb',
     tmpdir: path.join(appInfo.baseDir, '/images'),
     whitelist: [
@@ -59,18 +63,19 @@ module.exports = appInfo => {
   };
   config.graphqlUploadKoa = { maxFileSize: 10000000, maxFiles: 10 };
   config.basicGraphqlServer = { schema };
-  config.sequelize = {
-    dialect: 'postgres',
-    host: '127.0.0.1',
-    port: 5433,
-    username: 'postgres',
-    password: 'postgres',
-    database: 'assistant',
-    timezone: '+08:00',
-    define: {
-      underscored: false,
+
+  config.io = {
+    namespace: {
+      '/': {
+        connectionMiddleware: ['auth'],
+        packetMiddleware: ['filter'],
+      },
+      '/chat': {
+        connectionMiddleware: ['auth'],
+        packetMiddleware: [],
+      },
     },
-  }
+  };
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

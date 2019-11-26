@@ -1,5 +1,4 @@
 const { Service } = require('egg');
-const { Op } = require('sequelize');
 
 module.exports = class ImageStoreSvc extends Service {
 
@@ -62,23 +61,28 @@ module.exports = class ImageStoreSvc extends Service {
         return await model.findByPk(pk);
     }
     /**
-     * 按时间分组获取文件大小
+     * 按时间分组获取文件大小及上传日期
      * @param {string} unit 时间单位 
      * 支持 century, day, decade, dow, doy, epoch, hour, isodow, isoyear, 
      * microseconds, millennium, milliseconds, minute, month, quarter, 
      * second, timezone, timezone_hour, timezone_minute, week, year
      * @param {string} start 开始时间
      * @param {string} end 结束时间
+     * @param date 上传日期，返回字段名称，默认：date
+     * @param size 分组文件大小，返回字段名称，默认：size
      */
     async getGroupByDate(unit, start, end, date = 'date', size = 'size') {
         const { app } = this;
         const sql = `SELECT date_part('${unit}', updated_at) AS ${date}, sum(size) AS ${size} 
         FROM image_store 
-        where updated_at BETWEEN '${start}' and date'${end}'+1 
+        where updated_at BETWEEN '${start}' and date'${end}'
         GROUP BY ${date} ORDER BY ${date} asc`;
         return app.model.query(sql, { type: app.Sequelize.QueryTypes.SELECT });
     }
-
+    /**
+     * 按上传日期查询
+     * @param date 上传日期
+     */
     async getImageByUpdatedAt(date) {
         const { app } = this;
         const sql = `SELECT "id", "foreign_key" AS "foreignKey", 

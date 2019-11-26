@@ -9,6 +9,12 @@ class HomeController extends Controller {
       title: '我是首页',
     });
   }
+  async sio() {
+    const { ctx } = this;
+    await ctx.render('sio', {
+      title: '我是sio',
+    });
+  }
 }
 
 module.exports = HomeController;
