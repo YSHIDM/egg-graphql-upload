@@ -1,48 +1,88 @@
-const { Controller } = require('egg');
-const path = require('path');
-const fs = require('fs');
-const sendToWormhole = require('stream-wormhole');
+import { Controller } from 'egg';
+// import { ossUpload } from '../util/ossImage';
+import * as path from 'path';
+import { promises } from 'fs'
 
-module.exports = class ImageStore extends Controller {
+export default class ImageStore extends Controller {
     /**
-     * 文件模式多文件上传，
-     * 自动保存文件，再手动保存数据，
-     * 数据库操作失败，删除相关文件
+     * 上传图片
      */
     async uploadImages() {
+        // const { ctx, service, app, config } = this;
         const { ctx, service, app } = this;
 
-        const { foreignKey='', sourceType='' } = ctx.request.body;// 数据库不许为null时可以存''（空字符串）
+        const { userid } = ctx.state.user;
 
+        const { foreignKey, sourceType, } = ctx.request.body;
         if (!foreignKey || !sourceType) {
-            ctx.body = 'this.ctx.helper.getInfo(7011)';
+            ctx.body = this.ctx.helper.getInfo(7011);
+            return;
         }
 
-        const files = ctx.request.files;
-        const fileUtil = ctx.helper.fileUtil;
+        const files = ctx.request['files'];
+
         // const uploadRes = await ossUpload.ossUploadFiles(ctx.oss, config.oss.dirOfBucket, files);
         // console.log('uploadRAes', uploadRes)
         // await ctx.cleanupRequestFiles();
 
-        const records = files.map(async file => ({
-            foreignKey,
-            sourceType,
-            filename: file.filename,
-            size: await fileUtil.getFileSize(file.filepath),
-            url: '127.0.0.1:7002/' + path.relative(app.baseDir + '/images', file.filepath),
-            path: file.filepath,
-            creator: 'user.userid',
-        }));
+        const records = files.map(async (file, i, arr) => {
+            /** 图片存储位置相对路径 */
+            const storePath = path.relative(app.baseDir + ctx.helper.CONSTANT.TMP_IMAGES_PATH, file.filepath);
+            const url = ctx.helper.CONSTANT.LOCALHOST + storePath;
+            /**
+             * 移动文件位置
+             */
+            const newPath = path.join(app.baseDir, ctx.helper.CONSTANT.STORE_IMAGES_PATH, storePath);
+            //移动文件并获取大小
+            let size = await ctx.helper.renameAndGetSize(ctx.helper.CONSTANT.IMAGE_CRITICAL_SIZE, file.filepath, newPath);
+
+            arr[i].filepath = newPath;// 文件路径替换为新路径
+
+            return ({
+                foreignKey,
+                sourceType,
+                filename: file.filename,
+                size,
+                url,
+                path: newPath,
+                creator: userid,
+            });
+        });
+
         try {
-            ctx.body = await service.imageStoreSvc.bulkCreate(await Promise.all(records));
-        } catch {
-            fileUtil.bulkUnLink(files)
-            ctx.body = '上传失败'
+            ctx.body = ctx.helper.getInfo(200, null,
+                await service.imageStoreSvc.bulkCreate(await Promise.all(records)));
+        } catch (err) {
+            console.error('err', err)
+            files.forEach(async file => {
+                if (await ctx.helper.exists(file.filepath)) {//这里的文件路径已经替换为新路径
+                    promises.unlink(file.filepath)
+                }
+            });
+            ctx.body = ctx.helper.getInfo(5003);
         }
     }
-    async getImages() {
+    /**
+     * 删除图片
+     */
+    async deleteImage() {
         const { ctx, service } = this;
-        ctx.body = await service.imageStoreSvc.getImageByUpdatedAt('20191104');
+        const { id } = ctx.request.body;
+        const image = await service.imageStoreSvc.byPk(id);
+        if (image) {
+            await promises.unlink(image.path);
+            await service.imageStoreSvc.deleteImage(id);
+        }
+        ctx.body = ctx.helper.getInfo(200);
+    }
+    /**
+     * 按外键查询
+     */
+    async getImageByFK() {
+        const { ctx, service } = this;
+        const { foreignKey } = ctx.request.query;
+        const image = await service.imageStoreSvc.getImageByForeign({ foreignKey });
+        ctx.body = ctx.helper.getInfo(200, null, image);
     }
     /**
      * 流模式单文件上传，text 的类型数据没找到
