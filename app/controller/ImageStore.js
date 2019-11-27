@@ -1,9 +1,11 @@
-import { Controller } from 'egg';
 // import { ossUpload } from '../util/ossImage';
-import * as path from 'path';
-import { promises } from 'fs'
+const { Controller } = require('egg');
+const path = require('path');
+const fs = require('fs');
+const sendToWormhole = require('stream-wormhole');
 
-export default class ImageStore extends Controller {
+module.exports = class ImageStore extends Controller {
+    // export default class ImageStore extends Controller {
     /**
      * 上传图片
      */
@@ -11,7 +13,8 @@ export default class ImageStore extends Controller {
         // const { ctx, service, app, config } = this;
         const { ctx, service, app } = this;
 
-        const { userid } = ctx.state.user;
+        // const { userid } = ctx.state.user;
+        const userid = 'ys'
 
         const { foreignKey, sourceType, } = ctx.request.body;
         if (!foreignKey || !sourceType) {
@@ -26,15 +29,18 @@ export default class ImageStore extends Controller {
         // await ctx.cleanupRequestFiles();
 
         const records = files.map(async (file, i, arr) => {
+            console.log(app.baseDir , ctx.helper.CONSTANT.TMP_IMAGES_PATH, file.filepath)
             /** 图片存储位置相对路径 */
             const storePath = path.relative(app.baseDir + ctx.helper.CONSTANT.TMP_IMAGES_PATH, file.filepath);
+            console.log(storePath)
             const url = ctx.helper.CONSTANT.LOCALHOST + storePath;
+            console.log('url', url)
             /**
              * 移动文件位置
              */
             const newPath = path.join(app.baseDir, ctx.helper.CONSTANT.STORE_IMAGES_PATH, storePath);
             //移动文件并获取大小
-            let size = await ctx.helper.renameAndGetSize(ctx.helper.CONSTANT.IMAGE_CRITICAL_SIZE, file.filepath, newPath);
+            let size = await ctx.helper.fileUtil.renameAndGetSize(ctx.helper.CONSTANT.IMAGE_CRITICAL_SIZE, file.filepath, newPath);
 
             arr[i].filepath = newPath;// 文件路径替换为新路径
 
@@ -83,6 +89,14 @@ export default class ImageStore extends Controller {
         const { foreignKey } = ctx.request.query;
         const image = await service.imageStoreSvc.getImageByForeign({ foreignKey });
         ctx.body = ctx.helper.getInfo(200, null, image);
+    }
+    /**
+     * 按 id 查询
+     */
+    async getImages() {
+        const { ctx, service } = this;
+        const { id } = ctx.request.body;
+        ctx.body = await service.imageStoreSvc.getImageByUpdatedAt(id);
     }
     /**
      * 流模式单文件上传，text 的类型数据没找到
@@ -134,13 +148,6 @@ export default class ImageStore extends Controller {
                 part.pipe(fs.createWriteStream(filePath));
             }
         }
-        // partArray.map(part=>{
-        //     let imageInfo = {
-        //          filename : path.basename(part.filename);
-
-        //         ...params,
-        //     }
-        // })
 
         ctx.body = { ha: 'ha' }
     }

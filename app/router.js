@@ -9,6 +9,8 @@ module.exports = app => {
   router.get('/sio', controller.home.sio);
   
   router.post('/images', controller.imageStore.uploadImages);
+  router.post('/deleteImage', controller.imageStore.deleteImage);
+  router.post('/getImageByFK', controller.imageStore.getImageByFK);
   router.post('/getImages', controller.imageStore.getImages);
   router.post('/imagesStream', controller.imageStore.uploadStreamImage);
   router.post('/upload', controller.imageStore.uploadStreamImages);

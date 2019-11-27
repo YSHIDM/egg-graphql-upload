@@ -39,7 +39,7 @@ module.exports = appInfo => {
     mode: 'stream',
     fileModeMatch: /^\/images$/,
     fileSize: '5mb',
-    tmpdir: path.join(appInfo.baseDir, '/images'),
+    tmpdir: path.join(appInfo.baseDir, '/egg-multipart-tmp'),
     whitelist: [
       '.jpg', '.jpeg', // image/jpeg
       '.png', // image/png, image/x-png

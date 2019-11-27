@@ -1,13 +1,18 @@
-import {EggAppConfig, PowerPartial} from 'egg';
+const {EggAppConfig, PowerPartial} = require('egg');
 
-export default () => {
-    const config: PowerPartial<EggAppConfig> = {};
+module.exports = () => {
+    /**
+     * built-in config
+     * @type {Egg.EggAppConfig}
+     **/
+    const config = exports = {};
+
     config.sequelize = {
         dialect: 'postgres',
-        host: '118.190.84.62',
-        port: 5432,
+        host: '127.0.0.1',
+        port: 5433,
         username: 'postgres',
-        password: '123456',
+        password: 'postgres',
         database: 'assistant',
         timezone: '+08:00',
         define: {
@@ -22,6 +27,6 @@ export default () => {
             db: 0,
         },
     };
-    config.QX_CO = require('./qx_co');
+    
     return config;
 };

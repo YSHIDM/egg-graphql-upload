@@ -1,4 +1,10 @@
-const { promises: fsp } = require('fs');
+const fs = require('fs');
+const { promises: fsp } = fs;
+const path = require('path');
+const util = require('util');
+const gm = require('gm');
+gm.prototype.writePromise = util.promisify(gm.prototype.write);
+
 /**
  * 在 prePath 位置新建形如“YYYY/MM/DD”三层文件夹,并返回创建文件路径
  * @param {string} prePath 新建文件夹位置

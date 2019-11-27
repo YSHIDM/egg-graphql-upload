@@ -15,7 +15,7 @@ module.exports = app => {
         async task(ctx) {
             const min = new Date().getMinutes();
             // ctx.socket.emit('res', 'auth!' + min);
-            await fsp.appendFile(ctx.app.baseDir + '/text/b.txt', min + '\r');
+            // await fsp.appendFile(ctx.app.baseDir + '/text/b.txt', min + '\r');
             // ctx.app.cache = 'hahaha';
         },
     };
