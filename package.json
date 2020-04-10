@@ -1,7 +1,7 @@
 {
   "name": "egg-graphql-upload",
   "version": "1.0.0",
-  "description": "test koa-middleware-apollo，这是一个测试！",
+  "description": "test koa-middleware-apollo，这是一个测试！第二次",
   "private": true,
   "egg": {
     "declarations": true
