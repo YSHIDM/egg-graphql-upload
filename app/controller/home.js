@@ -10,10 +10,10 @@ class HomeController extends Controller {
     })
   }
   async sio() {
-    const { ctx } = this;
+    const { ctx } = this
     await ctx.render('sio', {
       title: '我是sio',
-    });
+    })
   }
 }
 

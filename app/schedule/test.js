@@ -1,25 +1,26 @@
 // const Subscription = require('egg').Subscription;
-const { promises: fsp } = require('fs');
+const { promises: fsp } = require('fs')
 
 module.exports = app => {
-    return {
-        schedule: {
-            cron: '0 * * * * *',
-            type: 'all',
-        },
-        /**
-         * append file
-         * @param {*} ctx 
-         * * 注意这个方法的名字
-         */
-        async task(ctx) {
-            const min = new Date().getMinutes();
-            // ctx.socket.emit('res', 'auth!' + min);
-            // await fsp.appendFile(ctx.app.baseDir + '/text/b.txt', min + '\r');
-            // ctx.app.cache = 'hahaha';
-        },
-    };
-};
+  return {
+    schedule: {
+      cron: '0 0 0 1 * *',
+      type: 'all',
+    },
+    /**
+     * append file
+     * @param {*} ctx 
+     * * 注意这个方法的名字
+     */
+    async task(ctx) {
+      
+      const min = new Date().getMinutes()
+      ctx.socket.emit('res', 'auth!' + min);
+      await fsp.appendFile(app.baseDir + '/text/b.txt', min + '\r');
+      app.cache = 'hahaha';
+    },
+  }
+}
 // class UpdateCache extends Subscription {
 //     static get schedule() {
 //         return {

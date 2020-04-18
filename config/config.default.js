@@ -29,7 +29,7 @@ module.exports = appInfo => {
       appInfo.baseDir + '/images',
       appInfo.baseDir + '/node_modules'
     ]
-  };
+  }
   config.view = {
     mapping: {
       '.html': 'ejs',
@@ -60,9 +60,9 @@ module.exports = appInfo => {
     app: true,
     agent: false,
     graphiql: true,
-  };
-  config.graphqlUploadKoa = { maxFileSize: 10000000, maxFiles: 10 };
-  config.basicGraphqlServer = { schema };
+  }
+  config.graphqlUploadKoa = { maxFileSize: 10000000, maxFiles: 10 }
+  config.basicGraphqlServer = { schema }
 
   config.io = {
     namespace: {
@@ -89,7 +89,7 @@ module.exports = appInfo => {
     define: {
       underscored: false,
     },
-  };
+  }
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

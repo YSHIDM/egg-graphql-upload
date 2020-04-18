@@ -57,11 +57,11 @@ module.exports = class ImageStoreSvc extends Service {
      * 按主键查询
      * @param {string} pk 主键
      */
-    async byPk(pk) {
-        const model = this.ctx.model.ImageStore;
-        return await model.findByPk(pk);
-    }
-    /**
+  async byPk(pk) {
+    const model = this.ctx.model.ImageStore
+    return await model.findByPk(pk)
+  }
+  /**
      * 按时间分组获取文件大小及上传日期
      * @param {string} unit 时间单位 
      * 支持 century, day, decade, dow, doy, epoch, hour, isodow, isoyear, 
@@ -77,16 +77,16 @@ module.exports = class ImageStoreSvc extends Service {
     const sql = `SELECT date_part('${unit}', updated_at) AS ${date}, sum(size) AS ${size} 
         FROM image_store 
         where updated_at BETWEEN '${start}' and date'${end}'
-        GROUP BY ${date} ORDER BY ${date} asc`;
-        return app.model.query(sql, { type: app.Sequelize.QueryTypes.SELECT });
-    }
-    /**
+        GROUP BY ${date} ORDER BY ${date} asc`
+    return app.model.query(sql, { type: app.Sequelize.QueryTypes.SELECT })
+  }
+  /**
      * 按上传日期查询
      * @param date 上传日期
      */
-    async getImageByUpdatedAt(date) {
-        const { app } = this;
-        const sql = `SELECT "id", "foreign_key" AS "foreignKey", 
+  async getImageByUpdatedAt(date) {
+    const { app } = this
+    const sql = `SELECT "id", "foreign_key" AS "foreignKey", 
         "source_type" AS "sourceType", "filename", "size", "url", "path", 
         "creator", "created_at" AS "createdAt", "modifier", 
         "updated_at" AS "updatedAt" FROM "image_store" AS "imageStore" 

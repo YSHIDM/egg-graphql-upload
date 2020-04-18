@@ -1,8 +1,8 @@
 module.exports = app => {
-    class User extends app.Service {
-        async say() {
-            return 'Hello Man!';
-        }
+  class User extends app.Service {
+    async say() {
+      return 'Hello Man!'
     }
-    return User;
-};
+  }
+  return User
+}
