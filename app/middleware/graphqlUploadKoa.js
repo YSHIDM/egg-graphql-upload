@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
-const { graphqlUploadKoa } = require('graphql-upload');
-module.exports = graphqlUploadKoa;
+const { graphqlUploadKoa } = require('graphql-upload')
+module.exports = graphqlUploadKoa

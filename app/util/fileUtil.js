@@ -12,10 +12,10 @@ gm.prototype.writePromise = util.promisify(gm.prototype.write);
  * @returns {Promise<string>} 新建文件文件路径
  */
 let makeFilePath = async (prePath, filename) => {
-    const now = new Date();
-    const filePath = prePath + `/${now.getFullYear()}/${now.getMonth()}/${now.getDate()}/`;
-    fsp.mkdir(filePath, { recursive: true });
-    return filePath + filename;
+  const now = new Date()
+  const filePath = prePath + `/${now.getFullYear()}/${now.getMonth()}/${now.getDate()}/`
+  fsp.mkdir(filePath, { recursive: true })
+  return filePath + filename
 }
 // mkdirByDate()
 /**
@@ -23,7 +23,7 @@ let makeFilePath = async (prePath, filename) => {
  * @param {string} filePath 文件路径
  * @returns {Promise<number>} 文件大小
  */
-let getFileSize = async filePath => (await fsp.stat(filePath)).size;
+let getFileSize = async filePath => (await fsp.stat(filePath)).size
 
 // getFileSize(__filename).then(o=>console.log('o', o))
 /**

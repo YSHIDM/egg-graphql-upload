@@ -1,13 +1,13 @@
-'use strict';
+'use strict'
 
-const Controller = require('egg').Controller;
+const Controller = require('egg').Controller
 
 class HomeController extends Controller {
   async index() {
-    const { ctx } = this;
+    const { ctx } = this
     await ctx.render('index', {
       title: '我是首页',
-    });
+    })
   }
   async sio() {
     const { ctx } = this;
@@ -17,4 +17,4 @@ class HomeController extends Controller {
   }
 }
 
-module.exports = HomeController;
+module.exports = HomeController

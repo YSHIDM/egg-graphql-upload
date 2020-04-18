@@ -1,58 +1,59 @@
-const { Service } = require('egg');
+const { Service } = require('egg')
+// const { Op } = require('sequelize')
 
 module.exports = class ImageStoreSvc extends Service {
 
-    /**
+  /**
      * 批量记录图片文件信息
      * @param {array} records 图片信息数组
      */
-    async bulkCreate(records) {
-        const { ctx, app } = this;
-        const model = ctx.model.ImageStore;
+  async bulkCreate(records) {
+    const { ctx, app } = this
+    const model = ctx.model.ImageStore
 
-        records.map((obj) => obj['id'] = app['genId']('IMG'));
+    records.map((obj) => obj['id'] = app['genId']('IMG'))
 
-        return await model.bulkCreate(records).then(data => data.map(d => d.toJSON()));
-    }
-    /**
+    return await model.bulkCreate(records).then(data => data.map(d => d.toJSON()))
+  }
+  /**
      * 记录图片文件信息
      * @param {*} imageInfo 图片信息
      */
-    async saveImageInfo(imageInfo) {
-        const { ctx, app } = this;
-        const model = ctx.model.ImageStore;
+  async saveImageInfo(imageInfo) {
+    const { ctx, app } = this
+    const model = ctx.model.ImageStore
 
-        imageInfo['id'] = app['genId']('IMG');
-        await model.create(imageInfo);
-        return await this.byPk(imageInfo['id']);
-    }
-    /**
+    imageInfo['id'] = app['genId']('IMG')
+    await model.create(imageInfo)
+    return await this.byPk(imageInfo['id'])
+  }
+  /**
      * 
      * @param {string} foreignKey 外键
      * @param {*} sourceType 来源类型
      */
-    async getImageByForeign(foreignKey, sourceType) {
-        const model = this.ctx.model.ImageStore;
-        return await model.findAll({
-            where: {
-                foreignKey,
-                sourceType
-            }
-        });
-    }
-    /**
+  async getImageByForeign(foreignKey, sourceType) {
+    const model = this.ctx.model.ImageStore
+    return await model.findAll({
+      where: {
+        foreignKey,
+        sourceType
+      }
+    })
+  }
+  /**
      * 修改文件信息
      * @param {any} imageInfo 图片信息
      */
-    async uploadImageByForeignKey(imageInfo) {
-        const model = this.ctx.model.ImageStore;
-        return await model.update(imageInfo, {
-            where: {
-                id: imageInfo.id
-            }
-        });
-    }
-    /**
+  async uploadImageByForeignKey(imageInfo) {
+    const model = this.ctx.model.ImageStore
+    return await model.update(imageInfo, {
+      where: {
+        id: imageInfo.id
+      }
+    })
+  }
+  /**
      * 按主键查询
      * @param {string} pk 主键
      */
@@ -71,9 +72,9 @@ module.exports = class ImageStoreSvc extends Service {
      * @param date 上传日期，返回字段名称，默认：date
      * @param size 分组文件大小，返回字段名称，默认：size
      */
-    async getGroupByDate(unit, start, end, date = 'date', size = 'size') {
-        const { app } = this;
-        const sql = `SELECT date_part('${unit}', updated_at) AS ${date}, sum(size) AS ${size} 
+  async getGroupByDate(unit, start, end, date = 'date', size = 'size') {
+    const { app } = this
+    const sql = `SELECT date_part('${unit}', updated_at) AS ${date}, sum(size) AS ${size} 
         FROM image_store 
         where updated_at BETWEEN '${start}' and date'${end}'
         GROUP BY ${date} ORDER BY ${date} asc`;
@@ -89,7 +90,7 @@ module.exports = class ImageStoreSvc extends Service {
         "source_type" AS "sourceType", "filename", "size", "url", "path", 
         "creator", "created_at" AS "createdAt", "modifier", 
         "updated_at" AS "updatedAt" FROM "image_store" AS "imageStore" 
-        where date(updated_at) = '${date}'`;
-        return app.model.query(sql, { type: app.Sequelize.QueryTypes.SELECT });
-    }
+        where date(updated_at) = '${date}'`
+    return app.model.query(sql, { type: app.Sequelize.QueryTypes.SELECT })
+  }
 }

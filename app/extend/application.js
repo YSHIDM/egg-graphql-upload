@@ -1,8 +1,8 @@
-const idMaker = require('../util/idMaker');
+const idMaker = require('../util/idMaker')
 
 
 
-const application = {};
-Object.assign(application, idMaker);
+const application = {}
+Object.assign(application, idMaker)
 
 module.exports = application

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   Mutation: {
@@ -6,7 +6,7 @@ module.exports = {
       return {
         rescode: 'String',
         resmessage: 'String',
-      };
+      }
     },
   },
   Query: {
@@ -14,19 +14,19 @@ module.exports = {
       return {
         rescode: 'String',
         resmessage: 'String',
-      };
+      }
     },
     getPermissionListForLogin() {
       return {
         rescode: 'String',
         resmessage: 'String',
-      };
+      }
     },
     getPermissionStateList() {
       return {
         rescode: 'String',
         resmessage: 'String',
-      };
+      }
     },
   },
-};
+}

@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
 class PermissionConnector {
   constructor(ctx) {
-    this.ctx = ctx;
+    this.ctx = ctx
   }
   /**
    * 获取所有权限-无状态
@@ -11,7 +11,7 @@ class PermissionConnector {
     return {
       rescode: 'String',
       resmessage: 'String',
-    };
+    }
   }
   /**
    * 获取用户所有权限状态-用于页面渲染
@@ -20,7 +20,7 @@ class PermissionConnector {
     return {
       rescode: 'String',
       resmessage: 'String',
-    };
+    }
   }
   /**
    * 根据角色权限值获取权限状态-编辑权限时使用
@@ -29,7 +29,7 @@ class PermissionConnector {
     return {
       rescode: 'String',
       resmessage: 'String',
-    };
+    }
   }
   /**
    * 修改角色权限值
@@ -38,7 +38,7 @@ class PermissionConnector {
     return {
       rescode: 'String',
       resmessage: 'String',
-    };
+    }
   }
 }
-module.exports = PermissionConnector;
+module.exports = PermissionConnector

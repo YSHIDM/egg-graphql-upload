@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 // 修改自 koa-middleware-apollo 中间件
 
@@ -6,7 +6,7 @@ const {
   ApolloServerBase,
   convertNodeHttpToRequest,
   runHttpQuery,
-} = require('apollo-server-core');
+} = require('apollo-server-core')
 // const {
 //   renderPlaygroundPage
 // } = require('@apollographql/graphql-playground-html');
@@ -15,7 +15,7 @@ const {
 const graphqlServer = (apollo, dependencies = {}) => {
   const setHeadersFromObject = (obj, ctx) => {
     if (ctx.request['content-type'] && !ctx.request['content-type'].startsWith('multipart/form-data; boundary')) {
-      return;
+      return
     }
     if (
       typeof obj === 'object' &&
@@ -23,10 +23,10 @@ const graphqlServer = (apollo, dependencies = {}) => {
       !!obj.headers
     ) {
       Object.entries(obj.headers).forEach(([ header, value ]) => {
-        ctx.set(header, value);
-      });
+        ctx.set(header, value)
+      })
     }
-  };
+  }
 
   const {
     getMethod = ctx => ctx.request.method,
@@ -34,7 +34,7 @@ const graphqlServer = (apollo, dependencies = {}) => {
     runQuery = runHttpQuery,
     getOptions = ctx => apollo.graphQLServerOptions({ ctx }),
     getRequest = ctx => convertNodeHttpToRequest(ctx.req),
-  } = dependencies;
+  } = dependencies
 
   return async (ctx, next) => {
     try {
@@ -43,25 +43,25 @@ const graphqlServer = (apollo, dependencies = {}) => {
         method: await getMethod(ctx),
         query: await getQuery(ctx),
         request: await getRequest(ctx),
-      });
+      })
 
-      setHeadersFromObject(responseInit, ctx);
+      setHeadersFromObject(responseInit, ctx)
 
-      ctx.body = graphqlResponse;
+      ctx.body = graphqlResponse
     } catch (e) {
       if (e.name !== 'HttpQueryError') {
-        throw e;
+        throw e
       }
 
-      setHeadersFromObject(e, ctx);
+      setHeadersFromObject(e, ctx)
 
-      ctx.status = e.statusCode;
-      ctx.body = e.message;
+      ctx.status = e.statusCode
+      ctx.body = e.message
     }
 
-    return next();
-  };
-};
+    return next()
+  }
+}
 
 // const playground = (options = {}, dependencies = {}) => {
 //   const {
@@ -81,7 +81,7 @@ const graphqlServer = (apollo, dependencies = {}) => {
 //   };
 // };
 
-const basicGraphqlServer = (config, dependencies) => graphqlServer(new ApolloServerBase(config), dependencies);
+const basicGraphqlServer = (config, dependencies) => graphqlServer(new ApolloServerBase(config), dependencies)
 
 
-module.exports = basicGraphqlServer;
+module.exports = basicGraphqlServer
