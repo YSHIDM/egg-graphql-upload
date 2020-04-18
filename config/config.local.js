@@ -13,7 +13,7 @@ module.exports = () => {
     port: 5433,
     username: 'postgres',
     password: 'postgres',
-    database: 'postgres',
+    database: 'assistant',
     timezone: '+08:00',
     define: {
       underscored: false,

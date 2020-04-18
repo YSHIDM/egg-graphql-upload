@@ -4,7 +4,7 @@ const { promises: fsp } = require('fs')
 module.exports = app => {
   return {
     schedule: {
-      cron: '0 0 0 1 * *',
+      cron: '* * * * * *',
       type: 'all',
     },
     /**
@@ -12,12 +12,13 @@ module.exports = app => {
      * @param {*} ctx 
      * * 注意这个方法的名字
      */
-    async task(ctx) {
-      
-      const min = new Date().getMinutes()
-      ctx.socket.emit('res', 'auth!' + min);
-      await fsp.appendFile(app.baseDir + '/text/b.txt', min + '\r');
-      app.cache = 'hahaha';
+    async task() {
+      console.log('11111', 11111)
+      // async task(ctx) {
+      // const min = new Date().getMinutes()
+      // ctx.socket.emit('res', 'auth!' + min)
+      // await fsp.appendFile(app.baseDir + '/text/b.txt', min + '\r')
+      // app.cache = 'hahaha'
     },
   }
 }
