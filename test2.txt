@@ -1,0 +1,39 @@
+[egg-bin] server port 7001 is in use, now using port 7002
+
+2020-05-25 16:32:49,649 ERROR 64962 [app_worker] server got error: bind EADDRINUSE null:7002, code: EADDRINUSE
+2020-05-25 16:32:49,667 ERROR 64945 nodejs.AppWorkerDiedError: [master] app_worker#1:64962 died (code: 0, signal: null, suicide: false, state: dead), current workers: []
+    at Master.onAppExit (/Users/lcy/Project/my/egg-graphql-upload/node_modules/egg-cluster/lib/master.js:510:21)
+    at Master.emit (events.js:210:5)
+    at Messenger.sendToMaster (/Users/lcy/Project/my/egg-graphql-upload/node_modules/egg-cluster/lib/utils/messenger.js:137:17)
+    at Messenger.send (/Users/lcy/Project/my/egg-graphql-upload/node_modules/egg-cluster/lib/utils/messenger.js:102:12)
+    at EventEmitter.<anonymous> (/Users/lcy/Project/my/egg-graphql-upload/node_modules/egg-cluster/lib/master.js:353:22)
+    at EventEmitter.emit (events.js:215:7)
+    at ChildProcess.<anonymous> (internal/cluster/master.js:188:13)
+    at Object.onceWrapper (events.js:300:26)
+    at ChildProcess.emit (events.js:210:5)
+    at Process.ChildProcess._handle.onexit (internal/child_process.js:272:12)
+name: "AppWorkerDiedError"
+pid: 64945
+hostname: yshipc
+
+2020-05-25 16:32:49,667 ERROR 64945 [master] app_worker#1:64962 start fail, exiting with code:1
+2020-05-25 16:32:49,667 ERROR 64945 [master] exit with code:1
+2020-05-25 16:32:49,678 ERROR 64957 [agent_worker] receive disconnect event on child_process fork mode, exiting with code:110
+2020-05-25 16:32:49,680 ERROR 64957 [agent_worker] exit with code:110
+Error: /Users/lcy/Project/my/egg-graphql-upload/node_modules/egg-bin/lib/start-cluster {"typescript":false,"declarations":true,"workers":1,"baseDir":"/Users/lcy/Project/my/egg-graphql-upload","port":7002,"framework":"/Users/lcy/Project/my/egg-graphql-upload/node_modules/egg"} exit with code 1
+    at ChildProcess.<anonymous> (/Users/lcy/Project/my/egg-graphql-upload/node_modules/common-bin/lib/helper.js:56:21)
+    at Object.onceWrapper (events.js:300:26)
+    at ChildProcess.emit (events.js:210:5)
+    at Process.ChildProcess._handle.onexit (internal/child_process.js:272:12) {
+  code: 1
+}
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! egg-graphql-upload@1.0.0 dev: `egg-bin dev`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the egg-graphql-upload@1.0.0 dev script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     /Users/lcy/.npm/_logs/2020-05-25T08_32_49_691Z-debug.log

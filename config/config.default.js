@@ -51,7 +51,7 @@ module.exports = appInfo => {
     },
   }
   // add your middleware config here
-  // config.middleware = [ 'graphql' ];
+  config.middleware = [ 'graphql' ];
   // config.middleware = ['graphql', 'graphqlUploadKoa', 'basicGraphqlServer'];
   config.authPath = ['/', '/images']
   // 配置grahql
@@ -63,6 +63,18 @@ module.exports = appInfo => {
   }
   config.graphqlUploadKoa = { maxFileSize: 10000000, maxFiles: 10 }
   config.basicGraphqlServer = { schema }
+
+  config.security = {
+    csrf: {
+      enable: false,
+      ignoreJSON: true
+    },
+    domainWhiteList: ['http://localhost:8080']
+  };
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+  };
 
   config.io = {
     namespace: {

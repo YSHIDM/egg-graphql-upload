@@ -18,6 +18,11 @@ module.exports = {
     enable: true,
     package: 'egg-sequelize',
   },
+  // 跨域
+  cors: {
+    enable: true,
+    package: 'egg-cors',
+  },
   io: {
     enable: true,
     package: 'egg-socket.io',

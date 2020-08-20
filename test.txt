@@ -1,0 +1,24 @@
+/Users/lcy/Project/my/egg-graphql-upload/
+
+> egg-graphql-upload@1.0.0 dev /Users/lcy/Project/my/egg-graphql-upload
+> egg-bin dev
+
+[egg-ts-helper] create typings/app/extend/application.d.ts (3ms)
+[egg-ts-helper] create typings/app/extend/context.d.ts (5ms)
+[egg-ts-helper] create typings/app/extend/helper.d.ts (5ms)
+[egg-ts-helper] create typings/app/controller/index.d.ts (1ms)
+[egg-ts-helper] create typings/app/middleware/index.d.ts (1ms)
+[egg-ts-helper] create typings/app/model/index.d.ts (1ms)
+[egg-ts-helper] create typings/config/index.d.ts (14ms)
+[egg-ts-helper] create typings/config/plugin.d.ts (2ms)
+[egg-ts-helper] create typings/app/service/index.d.ts (1ms)
+[egg-ts-helper] create typings/app/index.d.ts (0ms)
+2020-05-25 16:32:46,172 INFO 64946 [master] node version v12.13.0
+2020-05-25 16:32:46,172 INFO 64946 [master] egg version 2.25.0
+2020-05-25 16:32:47,928 INFO 64957 [egg-sequelize](26ms) Executed (default): SELECT 1+1 AS result
+2020-05-25 16:32:47,931 INFO 64945 [master] agent_worker#1:64957 started (1764ms)
+2020-05-25 16:32:49,634 INFO 64962 [egg-sequelize](29ms) Executed (default): SELECT 1+1 AS result
+[2020-05-25 16:32:49.665] [cfork:master:64945] worker:64962 disconnect (exitedAfterDisconnect: false, state: disconnected, isDead: false, worker.disableRefork: true)
+[2020-05-25 16:32:49.665] [cfork:master:64945] don't fork, because worker:64962 will be kill soon
+2020-05-25 16:32:49,666 INFO 64945 [master] app_worker#1:64962 disconnect, suicide: false, state: disconnected, current workers: ["1"]
+[2020-05-25 16:32:49.666] [cfork:master:64945] worker:64962 exit (code: 0, exitedAfterDisconnect: false, state: dead, isDead: true, isExpected: false, worker.disableRefork: true)
