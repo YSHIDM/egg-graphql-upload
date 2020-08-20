@@ -1,12 +1,15 @@
 type Mutation {
-  modifyRolePermission(id:Int): Res
+  modifyRolePermission(id: Int): Res
 
-  # TodoRes TodoListRes
+  # ResTodoNode ResTodoNodeList TodoNodeInput
 
-  addTodo(todo: TodoInput): TodoRes
+  saveTodoNode(obj: TodoNodeInput!): ResTodoNode
 
-  deleteTodo(text: String): NoneDataRes
+  # ResTodo ResTodoList TodoInput
 
-  updateTodo(text: String, done: Boolean): TodoRes
-
+  saveTodo(obj: TodoInput!): ResTodo
+  deleteTodoById(id: String!): ResTodo
+  todoNext(id: String!): ResTodo
+  todoDone(id: String!): ResTodo
+  changeTodoState(id: String!, state: String!): ResTodo
 }

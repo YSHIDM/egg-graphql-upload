@@ -5,7 +5,7 @@ const fs = require('fs')
 
 module.exports = {
   /**
-   * 
+   *
    * @param file 文件名
    * @param args shell 脚本参数
    */
@@ -21,8 +21,6 @@ module.exports = {
     // try {
 
     //   const result = await promisify(execFile)(file, args)
-    //   console.log('result.stderr', result.stderr)
-    //   console.log('result.stdout', result.stdout)
     //   return result;
     // } catch (error) {
     //   return error

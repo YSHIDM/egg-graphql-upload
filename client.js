@@ -3,7 +3,6 @@ const socket = require('socket.io-client')('http://127.0.0.1:7001/chat')
 const {execFile} = require('./app/util/shellUtil')
 
 socket.on('connect', () => {
-  console.log('connect!')
   // socket.emit('chat', {
   //   receiver: 123,
   //   payload: {
@@ -22,8 +21,6 @@ socket.on('connect', () => {
 
 socket.on('res', msg => {
   execFile('./shell/autoUpdate.sh', '/Users/lcy/Project/my/egg-graphql-upload/')
-  console.log('res from server: %s!', msg)
 })
 socket.send('hello')
-console.log('123123', 123123)
 socket.emit('chat','h哈哈 hh')

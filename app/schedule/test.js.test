@@ -9,11 +9,11 @@ module.exports = app => {
     },
     /**
      * append file
-     * @param {*} ctx 
+     * @param {*} ctx
      * * 注意这个方法的名字
      */
     async task() {
-      console.log('11111', 11111)
+      console.info('11111', 11111)
       // async task(ctx) {
       // const min = new Date().getMinutes()
       // ctx.socket.emit('res', 'auth!' + min)
@@ -33,8 +33,6 @@ module.exports = app => {
 
 //     // subscribe 是真正定时任务执行时被运行的函数
 //     async subscribe(ctx) {// 注意这个方法的名字
-//         console.log('hh')
-//         console.log('ctx', ctx)
 //         // await fsp.appendFile(ctx.app.baseDir + '/text/b.txt', Date.now());
 //         // ctx.app.cache = 'hahaha';
 //     };

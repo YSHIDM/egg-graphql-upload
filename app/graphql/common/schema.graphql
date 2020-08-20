@@ -1,0 +1,7 @@
+# 日期
+scalar Date
+# 删除后响应信息
+type NoneDataRes {
+  rescode: String
+  resmessage: String
+}

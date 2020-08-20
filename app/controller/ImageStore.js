@@ -13,7 +13,6 @@ module.exports = class ImageStore extends Controller {
   async uploadStreamImage() {
     const { ctx, app } = this
     // const { text } = ctx.request.body
-    console.log('text', ctx.request.body)
     const stream = await ctx.getFileStream({ requireFile: false })
     if (stream.filename) {
       const filename = path.basename(stream.filename)
@@ -46,10 +45,9 @@ module.exports = class ImageStore extends Controller {
         params[part[0]] = part[1]
       } else {//文件形式
         if (!part.filename) {
-          await sendToWormhole(part)// 处理未选择文件流，类似Linux命令 stream>/dev/null 
+          await sendToWormhole(part)// 处理未选择文件流，类似Linux命令 stream>/dev/null
           continue
         }
-        console.log('part', part)
         partArray.push(part)
         const filename = path.basename(part.filename)
         const fileUtil = ctx.helper.fileUtil
@@ -84,7 +82,6 @@ module.exports = class ImageStore extends Controller {
     const files = ctx.request.files
     const fileUtil = ctx.helper.fileUtil
     // const uploadRes = await ossUpload.ossUploadFiles(ctx.oss, config.oss.dirOfBucket, files);
-    // console.log('uploadRAes', uploadRes)
     // await ctx.cleanupRequestFiles();
 
     const records = files.map(async file => ({

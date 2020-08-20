@@ -9,7 +9,6 @@
 //     const ctx = app.mockContext()
 //     // 通过 ctx 访问到 service.user
 //     const jsonTestList = await ctx.service.jsonTestSvc.getJsonTestList({ id: '2', creator: 'ys', modifier: 'ys' })
-//     console.log('jsonTestList', jsonTestList)
 //     assert(jsonTestList)
 //   })
 
@@ -18,7 +17,6 @@
 //   //     const ctx = app.mockContext();
 //   //     // 通过 ctx 访问到 service.user
 //   //     const images = await ctx.service.imageStoreSvc.getImageByUpdatedAt('20191104');
-//   //     console.log('images', images)
 //   //     assert(images);
 //   //     // assert(user.name === 'fengmk2');
 //   // });

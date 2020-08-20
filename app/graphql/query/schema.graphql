@@ -9,6 +9,11 @@ type Query {
   # ================
   # todo
 
-  getTodoList: TodoListRes
-  getTodo(text: String, done: Boolean): TodoRes
+  getAllTodoNode: ResTodoNodeList
+
+  # ResTodo ResTodoList TodoInput
+
+  getTodoListByNode(node: String!): ResTodoList
+  getTodoListByState(node: String!): ResTodoList
+  getTodoById(id: ID!): ResTodo
 }

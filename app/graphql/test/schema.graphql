@@ -30,34 +30,3 @@ type Res {
 type IdRes {
   id: Int
 }
-
-# ================
-# todo
-
-type Todo {
-  text: String
-  done: Boolean
-}
-input TodoInput {
-  text: String
-  done: Boolean
-}
-type TodoRes {
-  # 返回码
-  rescode: Int
-  # 返回信息
-  resmessage: String
-  data: Todo
-}
-type TodoListRes {
-  # 返回码
-  rescode: Int
-  # 返回信息
-  resmessage: String
-  data: [Todo]
-}
-# 删除后响应信息
-type NoneDataRes {
-  rescode: String
-  resmessage: String
-}

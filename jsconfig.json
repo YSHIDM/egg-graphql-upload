@@ -1,5 +1,8 @@
 {
-  "include": [
-    "**/*"
+  // "include": [
+  //   "**/*"
+  // ],
+  "exclude": [
+    "app/public"
   ]
 }

@@ -1,0 +1,30 @@
+type TodoNode {
+  id: ID
+  name: String
+  title: String
+  alias: String
+
+  # 创建人
+  creator: String
+  # 创建时间
+  createdAt: Date
+  # 修改人
+  modifier: String
+  # 修改时间
+  updatedAt: Date
+}
+
+input TodoNodeInput {
+  id: ID
+  alias: String!
+}
+type ResTodoNode {
+  rescode: Int
+  resmessage: String
+  data: TodoNode
+}
+type ResTodoNodeList {
+  rescode: Int
+  resmessage: String
+  data: [TodoNode]
+}

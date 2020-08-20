@@ -25,10 +25,9 @@ let makeFilePath = async (prePath, filename) => {
  */
 let getFileSize = async filePath => (await fsp.stat(filePath)).size
 
-// getFileSize(__filename).then(o=>console.log('o', o))
 /**
- * 
- * @param {{filepath:string}[]} files 
+ *
+ * @param {{filepath:string}[]} files
  */
 let bulkUnLink = async files => files.forEach(file => fsp.unlink(file.filepath))
 
