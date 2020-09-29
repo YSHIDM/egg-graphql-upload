@@ -25,7 +25,7 @@ module.exports = app => {
       type: DataTypes.STRING(50),
       allowNull: true
     },
-    size:{
+    space_size:{
       type: DataTypes.INTEGER,
       allowNull: true
     },

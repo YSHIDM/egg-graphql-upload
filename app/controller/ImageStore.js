@@ -88,8 +88,8 @@ module.exports = class ImageStore extends Controller {
       foreignKey,
       sourceType,
       filename: file.filename,
-      size: await fileUtil.getFileSize(file.filepath),
-      url: '127.0.0.1:7002/' + path.relative(app.baseDir + '/images', file.filepath),
+      spaceSize: await fileUtil.getFileSize(file.filepath),
+      url: '127.0.0.1:7001/' + path.relative(app.baseDir + '/images', file.filepath),
       path: file.filepath,
       creator: 'user.userid',
     }))

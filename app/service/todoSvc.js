@@ -13,7 +13,8 @@ module.exports = class TodoSvc extends Service {
     const model = this.ctx.model.Todo
     obj.id = this.app['genId']('TODO')
     obj.node = 'todo'
-    obj.state = 'none'
+    obj.isArchive = false
+    obj.isRecycle = false
     // obj.creator = this.ctx.state.user.userId;
     return await model.create(obj).then(d => d.toJSON())
   }
@@ -79,25 +80,19 @@ module.exports = class TodoSvc extends Service {
     return { code: 2000, data: todo }
   }
   /**
-   * 按节点获取任务列表
-   * @param {string} node 任务类型
+   * 获取使用中的任务列表
    */
-  async getTodoListByNode(node) {
-    return this.getTodoList({ node, state: 'none' })
-  }
-  /**
-   * 按状态获取任务列表
-   * @param {string} state 任务状态
-   */
-  async getTodoListByState(state) {
-    return this.getTodoList({ state })
+  async getAllTodo() {
+    const data = await this.getTodoList()
+    return { code: 2000, data }
   }
   /**
    * 按 id 删除任务
    * @param {string} id 任务 id
    */
   async deleteTodoById(id) {
-    return this.deleteTodo({ id })
+    await this.deleteTodo({ id })
+    return { code: 2000 }
   }
   /**
    * 任务执行到下一步
@@ -109,8 +104,15 @@ module.exports = class TodoSvc extends Service {
       inProgress: 'testing',
       testing: 'done',
     }
+    let where = {}
     const todo = await this.byPk(id)
-    const data = await this.updateTodo({ id, type: nextType[todo.type] })
+    if (!nextType[todo.node]) {
+      return { code: 8000 }
+    } else {
+      where = { id, node: nextType[todo.node] }
+    }
+
+    const data = await this.updateTodo(where)
     return { code: 2000, data }
   }
   /**
@@ -118,16 +120,31 @@ module.exports = class TodoSvc extends Service {
    * @param {string} id 任务 id
    */
   async todoDone(id) {
-    const data = await this.updateTodo({ id, type: 'done' })
+    const data = await this.updateTodo({ id, node: 'done' })
     return { code: 2000, data }
   }
   /**
-   * 修改任务状态
-   * @param {string} id 任务 id
-   * @param {string} state 任务状态
+   * 废弃任务
+   * @param {string} id 任务ID
    */
-  async changeTodoState(id,state) {
-    const data = await this.updateTodo({ id, state })
+  async invalidateTodo(id){
+    const data = await this.updateTodo({ id, isRecycle: true })
+    return { code: 2000, data }
+  }
+  /**
+   * 还原任务
+   * @param {string} id 任务ID
+   */
+  async todoRecycle(id){
+    const data = await this.updateTodo({ id, isRecycle: false })
+    return { code: 2000, data }
+  }
+  /**
+   * 归档任务
+   * @param {string} id 任务ID
+   */
+  async todoArchive(id){
+    const data = await this.updateTodo({ id, isArchive: true })
     return { code: 2000, data }
   }
 }

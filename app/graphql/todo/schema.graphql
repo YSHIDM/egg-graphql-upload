@@ -3,7 +3,8 @@ type Todo {
   title: String
   content: String
   node: String
-  state: String
+  isArchive: Boolean
+  isRecycle: Boolean
 
   # 创建人
   creator: String

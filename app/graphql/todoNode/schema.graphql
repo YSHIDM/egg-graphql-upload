@@ -16,6 +16,8 @@ type TodoNode {
 
 input TodoNodeInput {
   id: ID
+  name: String
+  title: String
   alias: String!
 }
 type ResTodoNode {

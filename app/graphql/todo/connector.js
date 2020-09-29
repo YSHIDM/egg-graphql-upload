@@ -20,18 +20,10 @@ class TodoConnector {
     return await this.catchError('saveTodo', params)
   }
   /**
-   * 按节点获取任务列表
-   * @param  {...any} params 参数
+   * 获取使用中的任务列表
    */
-  async getTodoListByNode(...params) {
-    return await this.catchError('getTodoListByNode', params)
-  }
-  /**
-   * 按状态获取任务列表
-   * @param  {...any} params 参数
-   */
-  async getTodoListByState(...params) {
-    return await this.catchError('getTodoListByState', params)
+  async getAllTodo() {
+    return await this.catchError('getAllTodo')
   }
   /**
    * 按 id 删除任务
@@ -55,18 +47,25 @@ class TodoConnector {
     return await this.catchError('todoDone', params)
   }
   /**
-   * 修改任务状态
+   * 废弃任务
    * @param  {...any} params 参数
    */
-  async changeTodoState(...params) {
-    return await this.catchError('changeTodoState', params)
+  async invalidateTodo(...params) {
+    return await this.catchError('invalidateTodo', params)
   }
   /**
-   * 按 id 获取任务
+   * 还原任务
    * @param  {...any} params 参数
    */
-  async getTodoById(...params) {
-    return await this.catchError('byPk', params)
+  async todoRecycle(...params) {
+    return await this.catchError('todoRecycle', params)
+  }
+  /**
+   * 归档任务
+   * @param  {...any} params 参数
+   */
+  async todoArchive(...params) {
+    return await this.catchError('todoArchive', params)
   }
 }
 module.exports = TodoConnector

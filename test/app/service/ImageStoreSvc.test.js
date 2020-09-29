@@ -4,13 +4,15 @@ const { app } = require('egg-mock/bootstrap')
 
 describe('get()', () => {
 
-  // it('按时间分组获取文件大小', async () => {
-  //   // 创建 ctx
-  //   const ctx = app.mockContext()
-  //   // 通过 ctx 访问到 service.user
-  //   const imagesGroup = await ctx.service.imageStoreSvc.getGroupByDate('day', '2019-11-01', '2019-11-04', 'name', 'value')
-  //   assert(imagesGroup)
-  // })
+  it('按时间分组获取文件大小', async () => {
+    // 创建 ctx
+    const ctx = app.mockContext()
+    // 通过 ctx 访问到 service.user
+    // const imagesGroup = await ctx.service.imageStoreSvc.getGroupByDate('day', '2019-11-01', '2019-11-04', 'name', 'value')
+    // assert(imagesGroup)
+    const data = await ctx.service.todoNodeSvc.deleteTodoNode()
+    console.log(data)
+  })
 
   // it('按主键查询', async () => {
   //   // 创建 ctx

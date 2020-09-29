@@ -11,5 +11,7 @@ type Mutation {
   deleteTodoById(id: String!): ResTodo
   todoNext(id: String!): ResTodo
   todoDone(id: String!): ResTodo
-  changeTodoState(id: String!, state: String!): ResTodo
+  invalidateTodo(id: String!): ResTodo
+  todoRecycle(id: String!): ResTodo
+  todoArchive(id: String!): ResTodo
 }

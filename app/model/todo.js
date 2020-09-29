@@ -24,12 +24,14 @@ module.exports = app => {
       type: DataTypes.STRING(10),
       allowNull: false,
     },
-    // none,done,recycle,archive
-    state: {
+    isArchive: {
       type: DataTypes.STRING(10),
       allowNull: false,
     },
-
+    isRecycle:{
+      type: DataTypes.STRING(10),
+      allowNull: false,
+    },
     creator: {
       type: DataTypes.STRING(50),
       allowNull: true
@@ -56,7 +58,6 @@ module.exports = app => {
     }
   }, {
     tableName: 'todo'
-
   })
 
   Model.byPk = async function (pk) {

@@ -33,4 +33,7 @@ module.exports = {
   // 上传文件
   7011: '上传文件需要外键（foreignKey）和图片来源（foreignType）',
   7012: '请上传图片类型文件',
+
+  // todo 任务
+  8000: '任务已经完成',
 }

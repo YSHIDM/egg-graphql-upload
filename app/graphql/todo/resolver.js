@@ -14,19 +14,19 @@ module.exports = {
     todoDone(_root, { id }, ctx) {
       return ctx.connector.todo.todoDone(id)
     },
-    changeTodoState(_root, { id, state }, ctx) {
-      return ctx.connector.todo.changeTodoState(id, state)
+    invalidateTodo(_root, { id }, ctx) {
+      return ctx.connector.todo.invalidateTodo(id)
+    },
+    todoRecycle(_root, { id }, ctx) {
+      return ctx.connector.todo.todoRecycle(id)
+    },
+    todoArchive(_root, { id }, ctx) {
+      return ctx.connector.todo.todoArchive(id)
     },
   },
   Query: {
-    getTodoListByNode(_root, { node }, ctx) {
-      return ctx.connector.todo.getTodoListByNode(node)
-    },
-    getTodoListByState(_root, { state }, ctx) {
-      return ctx.connector.todo.getTodoListByState(state)
-    },
-    getTodoById(_root, { id }, ctx) {
-      return ctx.connector.todo.getTodoListByState(id)
+    getAllTodo(_root, { }, ctx) {
+      return ctx.connector.todo.getAllTodo()
     },
   },
 }

@@ -2,70 +2,111 @@
 <html lang="en">
 
 <head>
-    <title><%-title%></title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%-title%></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    const Ajax = {
+      get (url, fn) {
+        // XMLHttpRequest对象用于在后台与服务器交换数据
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, false);
+        xhr.onreadystatechange = function () {
+          // readyState == 4说明请求已完成
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200 || xhr.status == 304) {
+              console.log(xhr.responseText);
+              fn.call(xhr.responseText);
+            }
+          }
+        }
+        xhr.send();
+      },
+
+      // data应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
+      post (url, data, fn) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', url, false);
+        // 添加http头，发送信息至服务器时内容编码类型
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200 || xhr.status == 304) {
+              // console.log(xhr.responseText);
+              fn.call(xhr.responseText);
+            }
+          }
+        }
+        xhr.send(data);
+      }
+    }
+    function restart() {
+      console.log('cq')
+      Ajax.post('/restart')
+    }
+  </script>
 </head>
 
 <body>
-    <form method="post" action="/images?_csrf={{ ctx.csrf | safe }}" enctype="multipart/form-data">
-        <table>
-            <tr>
-                <td>
-                    <input type="file" name="logo">
-                    <input type="hidden" name="foreignKey" value="123">
-                    <input type="hidden" name="sourceType" value="123">
-                </td>
-            </tr>
-            <tr>
-                <td><input type="file" name="logo"></td>
-            </tr>
-            <tr>
-                <td><input type="file" name="logo"></td>
-            </tr>
-            <tr>
-                <td><input type="file" name="logo"></td>
-            </tr>
-            <tr>
-                <td><input type="file" name="logo"></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="保存"></td>
-            </tr>
-        </table>
-    </form>
-    <form method="post" action="/imagesStream?_csrf={{ ctx.csrf | safe }}" enctype="multipart/form-data">
-        <table>
-            <tr>
-                <td><input type="file" name="logo"></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="text" value="保存"></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="保存"></td>
-            </tr>
-        </table>
-    </form>
-    <form method="post" action="/upload?_csrf={{ ctx.csrf | safe }}" enctype="multipart/form-data">
-        <table>
-            <tr>
-                <td><input type="file" name="logo"></td>
-            </tr>
-            <tr>
-                <td><input type="file" name="logo"></td>
-            </tr>
-            <tr>
-                <td><input type="file" name="logo"></td>
-            </tr>
-            <tr>
-                <td><input type="text" name="text" value="保存"></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="保存"></td>
-            </tr>
-        </table>
-    </form>
+  <button onclick="restart()">重启</button>
+  <form method="post" action="/images?_csrf={{ ctx.csrf | safe }}" enctype="multipart/form-data">
+    <table>
+      <tr>
+        <td>
+          <input type="file" name="logo">
+          <input type="hidden" name="foreignKey" value="123">
+          <input type="hidden" name="sourceType" value="123">
+        </td>
+      </tr>
+      <tr>
+        <td><input type="file" name="logo"></td>
+      </tr>
+      <tr>
+        <td><input type="file" name="logo"></td>
+      </tr>
+      <tr>
+        <td><input type="file" name="logo"></td>
+      </tr>
+      <tr>
+        <td><input type="file" name="logo"></td>
+      </tr>
+      <tr>
+        <td><input type="submit" value="保存"></td>
+      </tr>
+    </table>
+  </form>
+  <form method="post" action="/imagesStream?_csrf={{ ctx.csrf | safe }}" enctype="multipart/form-data">
+    <table>
+      <tr>
+        <td><input type="file" name="logo"></td>
+      </tr>
+      <tr>
+        <td><input type="text" name="text" value="保存"></td>
+      </tr>
+      <tr>
+        <td><input type="submit" value="保存"></td>
+      </tr>
+    </table>
+  </form>
+  <form method="post" action="/upload?_csrf={{ ctx.csrf | safe }}" enctype="multipart/form-data">
+    <table>
+      <tr>
+        <td><input type="file" name="logo"></td>
+      </tr>
+      <tr>
+        <td><input type="file" name="logo"></td>
+      </tr>
+      <tr>
+        <td><input type="file" name="logo"></td>
+      </tr>
+      <tr>
+        <td><input type="text" name="text" value="保存"></td>
+      </tr>
+      <tr>
+        <td><input type="submit" value="保存"></td>
+      </tr>
+    </table>
+  </form>
 </body>
 
 </html>

@@ -55,6 +55,11 @@ module.exports = class TodoNodeSvc extends Service {
     })
     return todoNodeList.map(d => d.toJSON())
   }
+  // async deleteTodoNode() {
+  //   const model = this.ctx.model.TodoNode
+  //   const length = await model.destroy({ where: { id: 'TONOxjpxPXfV8a' } })
+  //   return { code: 2000, data: length }
+  // }
 
   /**
    * 保存任务节点
@@ -74,7 +79,7 @@ module.exports = class TodoNodeSvc extends Service {
    * @param {string} type 任务类型
    */
   async getAllTodoNode() {
-    const data = await this.getTodoNodeList();
+    const data = await this.getTodoNodeList()
     return { code: 2000, data }
   }
 }
