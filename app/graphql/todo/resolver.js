@@ -23,6 +23,9 @@ module.exports = {
     todoArchive(_root, { id }, ctx) {
       return ctx.connector.todo.todoArchive(id)
     },
+    addTodo(_root, { }, ctx) {
+      return ctx.connector.todo.addTodo()
+    }
   },
   Query: {
     getAllTodo(_root, { }, ctx) {

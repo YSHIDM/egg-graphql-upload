@@ -14,4 +14,5 @@ type Mutation {
   invalidateTodo(id: String!): ResTodo
   todoRecycle(id: String!): ResTodo
   todoArchive(id: String!): ResTodo
+  addTodo: NoneDataRes
 }

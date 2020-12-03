@@ -21,8 +21,8 @@ module.exports = app => {
   router.post('/testRestart',controller.configFile.testRestart)
 
   // app.io.of('/')
-  app.io.route('chat', app.io.controller.chat.index)
+  app.io.route('chat1', app.io.controller.chat.index)
 
   // app.io.of('/chat')
-  app.io.of('/chat').route('chat', app.io.controller.chat.index)
+  app.io.of('/chat').route('chat', app.io.controller.chat.chat)
 }

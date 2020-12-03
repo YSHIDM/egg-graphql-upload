@@ -1,7 +1,7 @@
 // app.js
 class AppBootHook {
   constructor(app) {
-    this.app = app;
+    this.app = app
   }
 
   configWillLoad() {
@@ -15,7 +15,7 @@ class AppBootHook {
   }
 
   async didReady() {
-    this.app.model.sync()
+    // this.app.model.sync()
   }
 
   async serverDidReady() {
@@ -23,7 +23,7 @@ class AppBootHook {
   }
 }
 
-module.exports = AppBootHook;
+module.exports = AppBootHook
 
 // module.exports = app => {
 //   app.beforeStart(async () => {

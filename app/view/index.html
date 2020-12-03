@@ -56,12 +56,14 @@
     window.onload = function () {
       // const socket = io('http://localhost:7001');
       // init
-      const socket = io('http://localhost:7001', {
+      // http://localhost:7001/namespace
+      const socket = io('http://localhost:7001/chat', {
         // 实际使用中可以在这里传递参数
         query: {
           room: 'demo',
           userId: `client_${ Math.random() }`,
         },
+        // path:'/demo',
         transports: ['websocket']
       });
       socket.on('connect', () => {
@@ -90,6 +92,7 @@
         console.log('back', back);
       });
       window.socket = socket;
+      window.socket.emit('chat1', 'connect')
       window.socket.emit('chat', 'connect')
     };
 
