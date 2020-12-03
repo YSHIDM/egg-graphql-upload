@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
   <title><%-title%></title>
@@ -54,16 +54,16 @@
     const log = console.log;
 
     window.onload = function () {
-      const socket = io('http://localhost:7001');
+      // const socket = io('http://localhost:7001');
       // init
-      // const socket = io('/', {
-      //   // 实际使用中可以在这里传递参数
-      //   query: {
-      //     room: 'demo',
-      //     userId: `client_${ Math.random() }`,
-      //   },
-      //   transports: ['websocket']
-      // });
+      const socket = io('http://localhost:7001', {
+        // 实际使用中可以在这里传递参数
+        query: {
+          room: 'demo',
+          userId: `client_${ Math.random() }`,
+        },
+        transports: ['websocket']
+      });
       socket.on('connect', () => {
         const id = socket.id;
         log('#connect,', id, socket);
@@ -90,7 +90,7 @@
         console.log('back', back);
       });
       window.socket = socket;
-      window.socket.emit('chat')
+      window.socket.emit('chat', 'connect')
     };
 
   </script>

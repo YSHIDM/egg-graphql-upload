@@ -9,11 +9,11 @@ module.exports = () => {
 
   config.sequelize = {
     dialect: 'postgres',
-    host: '115.28.138.4',
-    port: 5433,
+    host: 'localhost',
+    port: 5434,
     username: 'postgres',
     password: 'postgres',
-    database: 'postgres',
+    database: 'test',
     timezone: '+08:00',
     define: {
       underscored: false,
