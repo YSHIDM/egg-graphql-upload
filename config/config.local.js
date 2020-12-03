@@ -8,17 +8,17 @@ module.exports = () => {
   const config = exports = {}
 
   config.sequelize = {
-    dialect: 'postgres',
-    host: '115.28.138.4',
-    port: 5433,
+    dialect: 'postgres', // support: mysql, mariadb, postgres, mssql
+    host: '192.168.199.54', // 118.190.84.62
+    port: 5434,
     username: 'postgres',
     password: 'postgres',
-    database: 'postgres',
+    database: 'test',
     timezone: '+08:00',
     define: {
       underscored: false,
     },
-  }
+  };
   config.redis = {
     client: {
       port: 6378,          // Redis port

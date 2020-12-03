@@ -5,9 +5,10 @@
   <title><%-title%></title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="./socket.io.js"></script>
   <script>
     const Ajax = {
-      get (url, fn) {
+      get(url, fn) {
         // XMLHttpRequest对象用于在后台与服务器交换数据
         const xhr = new XMLHttpRequest();
         xhr.open('GET', url, false);
@@ -24,7 +25,7 @@
       },
 
       // data应为'a=a1&b=b1'这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式
-      post (url, data, fn) {
+      post(url, data, fn) {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', url, false);
         // 添加http头，发送信息至服务器时内容编码类型
@@ -44,11 +45,60 @@
       console.log('cq')
       Ajax.post('/restart')
     }
+    function testRestart() {
+      console.log('cq')
+      Ajax.post('/testRestart')
+    }
+
+    // browser
+    const log = console.log;
+
+    window.onload = function () {
+      const socket = io('http://localhost:7001');
+      // init
+      // const socket = io('/', {
+      //   // 实际使用中可以在这里传递参数
+      //   query: {
+      //     room: 'demo',
+      //     userId: `client_${ Math.random() }`,
+      //   },
+      //   transports: ['websocket']
+      // });
+      socket.on('connect', () => {
+        const id = socket.id;
+        log('#connect,', id, socket);
+        // 监听自身 id 以实现 p2p 通讯
+        socket.on(id, msg => {
+          log('#receive,', msg);
+        });
+      });
+      // 接收在线用户信息
+      socket.on('online', msg => {
+        log('#online,', msg);
+      });
+      // 系统事件
+      socket.on('disconnect', msg => {
+        log('#disconnect', msg);
+      });
+      socket.on('disconnecting', () => {
+        log('#disconnecting');
+      });
+      socket.on('error', () => {
+        log('#error');
+      });
+      socket.on('chatBack', back => {
+        console.log('back', back);
+      });
+      window.socket = socket;
+      window.socket.emit('chat')
+    };
+
   </script>
 </head>
 
 <body>
   <button onclick="restart()">重启</button>
+  <button onclick="testRestart()">重启测试</button>
   <form method="post" action="/images?_csrf={{ ctx.csrf | safe }}" enctype="multipart/form-data">
     <table>
       <tr>

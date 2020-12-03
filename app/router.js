@@ -18,6 +18,7 @@ module.exports = app => {
   router.post('/download.js', controller.configFile.download)
 
   router.post('/restart',controller.configFile.restart)
+  router.post('/testRestart',controller.configFile.testRestart)
 
   // app.io.of('/')
   app.io.route('chat', app.io.controller.chat.index)

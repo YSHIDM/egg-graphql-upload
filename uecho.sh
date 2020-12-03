@@ -10,10 +10,3 @@ cd $dir
 # pid=$(netstat -nlp | grep :$port | awk '{print $7}' | awk -F"/" '{ print $1 }')
 pid=$(lsof -i:7001 | grep node | awk '{print $2}')
 echo "pid: $pid"
-if [[ $pid ]]; then
-  kill -9 $pid
-fi
-# nohup npm run dev >/dev/null 2>&1 &
-# npm run stop
-nohup npm run start >egg.log 2>&1 &
-exit 0
