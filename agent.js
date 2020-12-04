@@ -74,7 +74,6 @@ module.exports = agent => {
     initScheduleList(ctx)
   })
   agent.messenger.on('addTodo', ()=>{
-    ctx.logger.info(JSON.stringify('hello'))
     socket.emit('addTodo', 'agent')
   })
   socket.on('connect', () => {

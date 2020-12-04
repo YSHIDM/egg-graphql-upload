@@ -6,9 +6,9 @@ module.exports = {
   // static: {
   //   enable: true,
   // }
-  graphql: {
+  'apollo-server': {
     enable: true,
-    package: 'egg-graphql',
+    package: 'egg-apollo-server',
   },
   ejs: {
     enable: true,

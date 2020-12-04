@@ -11,7 +11,10 @@ class AppBootHook {
   }
 
   async willReady() {
-
+    const room = await this.app.redis.get('room:demo')
+    if (!room) {
+      await this.app.redis.set('room:demo', 'demo')
+    }
   }
 
   async didReady() {

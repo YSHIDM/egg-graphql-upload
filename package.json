@@ -12,6 +12,7 @@
     "acorn-jsx": "^5.1.0",
     "co-mocha": "^1.2.2",
     "egg": "^2.25.0",
+    "egg-apollo-server": "^0.3.0",
     "egg-cors": "^2.2.3",
     "egg-graphql": "^2.7.0",
     "egg-multipart": "^2.9.0",

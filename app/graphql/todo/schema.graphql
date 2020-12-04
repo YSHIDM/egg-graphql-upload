@@ -31,3 +31,17 @@ type ResTodoList {
   resmessage: String
   data: [Todo]
 }
+
+extend type Query {
+  getAllTodo: ResTodoList
+}
+extend type Mutation{
+  saveTodo(obj: TodoInput!): ResTodo
+  deleteTodoById(id: String!): ResTodo
+  todoNext(id: String!): ResTodo
+  todoDone(id: String!): ResTodo
+  invalidateTodo(id: String!): ResTodo
+  todoRecycle(id: String!): ResTodo
+  todoArchive(id: String!): ResTodo
+  addTodo: NoneDataRes
+}

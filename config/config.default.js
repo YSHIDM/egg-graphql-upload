@@ -20,7 +20,11 @@ module.exports = appInfo => {
   config.security = {
     csrf: {
       enable: false,
+      ignoreJSON: false,
+      withCredentials: false,
+      ignore: () => true,
     },
+    domainWhiteList: ['*'],
   }
   config.cluster = {
     listen: {
@@ -102,7 +106,7 @@ module.exports = appInfo => {
       host: '127.0.0.1',
       port: 6378,
       auth_pass: '123456',
-      db: 0,
+      db: 1,
     },
     generateId: request => {
       // Something like UUID.
@@ -125,12 +129,12 @@ module.exports = appInfo => {
     },
   }
   // add your user config here
-  const userConfig = {
-    // myAppName: 'egg',
-  }
+  // const userConfig = {
+  //   // myAppName: 'egg',
+  // }
 
   return {
     ...config,
-    ...userConfig,
+    // ...userConfig,
   }
 }

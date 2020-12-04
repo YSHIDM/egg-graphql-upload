@@ -30,3 +30,10 @@ type ResTodoNodeList {
   resmessage: String
   data: [TodoNode]
 }
+
+extend type Query {
+  getAllTodoNode: ResTodoNodeList
+}
+extend type Mutation{
+  saveTodoNode(obj: TodoNodeInput!): ResTodoNode
+}

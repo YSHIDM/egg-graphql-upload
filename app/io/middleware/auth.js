@@ -22,16 +22,19 @@
 
 //       // 踢出用户前发送消息
 //       socket.emit(id, helper.parseMsg('deny', msg))
-//       console.log('nsp :>>', nsp)
+//       // console.log('nsp :>>', nsp)
 //       // 调用 adapter 方法踢出用户，客户端触发 disconnect 事件
-//       console.log('nsp.adapter. :>>', nsp.adapter.);
-//       nsp.adapter.remoteDisconnect(id, true, err => logger.error(err))
+//       // console.log('nsp.adapter :>>', nsp.adapter)
+//       nsp.adapter.remoteDisconnect(id, true, err => {
+//         logger.error(err)
+//         delete socket.rooms[id]
+//         socket.removeAllListeners()
+//       })
 //     }
 
 //     // 检查房间是否存在，不存在则踢出用户
 //     // 备注：此处 app.redis 与插件无关，可用其他存储代替
 //     const hasRoom = await app.redis.get(`${ PREFIX }:${ room }`)
-//     console.log('444 :>>', 444)
 //     logger.debug('#has_exist', hasRoom)
 
 //     if (!hasRoom) {
@@ -42,7 +45,6 @@
 //       return
 //     }
 
-//     console.log('555 :>>', 555)
 //     // 用户加入
 //     logger.debug('#join', room)
 //     socket.join(room)
@@ -60,7 +62,6 @@
 //       })
 //     })
 
-//     console.log('666 :>>', 666)
 //     await next()
 
 //     // 用户离开
