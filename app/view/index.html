@@ -92,14 +92,18 @@
         console.log('back', back);
       });
       window.socket = socket;
-      window.socket.emit('chat1', 'connect')
-      window.socket.emit('chat', 'connect')
+      window.socket.emit('addTodo', 'connect')
     };
-
+    // function emit() {
+    //   console.log(123)
+    //   window.socket.emit('chat', 'html')
+    // }
   </script>
 </head>
 
 <body>
+  <button onclick="emit()">触发</button>
+  <br>
   <button onclick="restart()">重启</button>
   <button onclick="testRestart()">重启测试</button>
   <form method="post" action="/images?_csrf={{ ctx.csrf | safe }}" enctype="multipart/form-data">

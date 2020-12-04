@@ -18,7 +18,7 @@ module.exports = () => {
     define: {
       underscored: false,
     },
-  };
+  }
   config.redis = {
     client: {
       port: 6378,          // Redis port
@@ -26,14 +26,6 @@ module.exports = () => {
       password: '123456',
       db: 0,
     },
-  };
-  config.io = {
-    redis: {
-      port: 6378,          // Redis port
-      host: '127.0.0.1',   // Redis host
-      auth_pass: '123456',
-      db: 0,
-    }
   }
 
   return config

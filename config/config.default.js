@@ -1,6 +1,7 @@
 /* eslint valid-jsdoc: "off" */
 
 'use strict'
+const UUID = require('uuid')
 
 const schema = require('../app/util/schema/schema')
 const path = require('path')
@@ -19,6 +20,13 @@ module.exports = appInfo => {
   config.security = {
     csrf: {
       enable: false,
+    },
+  }
+  config.cluster = {
+    listen: {
+      path: '',
+      port: 7001,
+      hostname: '0.0.0.0',
     },
   }
   // 配置前端静态文件路径
@@ -77,6 +85,9 @@ module.exports = appInfo => {
   }
 
   config.io = {
+    init: {
+      wsEngine: 'ws',
+    },
     namespace: {
       '/': {
         connectionMiddleware: ['auth'],
@@ -86,7 +97,18 @@ module.exports = appInfo => {
         connectionMiddleware: ['auth'],
         packetMiddleware: [],
       },
-    }
+    },
+    redis: {
+      host: '127.0.0.1',
+      port: 6378,
+      auth_pass: '123456',
+      db: 0,
+    },
+    generateId: request => {
+      // Something like UUID.
+      const socketId = request._query.socketId || UUID.v1()
+      return socketId
+    },
   }
   config.graphqlUploadKoa = { maxFileSize: 10000000, maxFiles: 10 }
   config.basicGraphqlServer = { schema }
