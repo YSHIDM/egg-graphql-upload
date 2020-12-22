@@ -19,17 +19,17 @@ module.exports = app => {
       type: DataTypes.STRING(100),
       allowNull: true,
     },
-    // TODONode 的那么: todo,inProgress,testing,done
+    // TODONode 的名字: todo,inProgress,testing,done
     node: {
       type: DataTypes.STRING(10),
       allowNull: false,
     },
     isArchive: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
     isRecycle:{
-      type: DataTypes.STRING(10),
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
     creator: {

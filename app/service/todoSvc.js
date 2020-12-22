@@ -62,7 +62,7 @@ module.exports = class TodoSvc extends Service {
     const model = this.ctx.model.Todo
     const todoList = await model.findAll({
       where,
-      order: [['createdAt', 'ASC']]
+      order: [['createdAt', 'DESC']]
     })
     return todoList.map(d => d.toJSON())
   }
@@ -84,6 +84,29 @@ module.exports = class TodoSvc extends Service {
    */
   async getAllTodo() {
     const data = await this.getTodoList()
+    // const data = {
+    //   recycle: [],
+    //   archive: [],
+    //   todo: [],
+    //   inProgress: [],
+    //   testing: [],
+    //   done: [],
+    // }
+    // todoList.forEach((todo) => {
+    //   if (todo.isRecycle) {
+    //     data.recycle.push(todo)
+    //   } else if (todo.isArchive) {
+    //     data.archive.push(todo)
+    //   } else if (todo.node === 'todo') {
+    //     data.todo.push(todo)
+    //   } else if (todo.node === 'inProgress') {
+    //     data.inProgress.push(todo)
+    //   } else if (todo.node === 'testing') {
+    //     data.testing.push(todo)
+    //   } else if (todo.node === 'done') {
+    //     data.done.push(todo)
+    //   }
+    // })
     return { code: 2000, data }
   }
   /**
