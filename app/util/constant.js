@@ -24,5 +24,5 @@ module.exports = {
   /**
      * @param 图片压缩临界值,200K,值单位:byte
      */
-  IMAGE_CRITICAL_SIZE:200*1024
+  IMAGE_CRITICAL_SIZE: 200 * 1024
 }

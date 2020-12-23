@@ -84,29 +84,6 @@ module.exports = class TodoSvc extends Service {
    */
   async getAllTodo() {
     const data = await this.getTodoList()
-    // const data = {
-    //   recycle: [],
-    //   archive: [],
-    //   todo: [],
-    //   inProgress: [],
-    //   testing: [],
-    //   done: [],
-    // }
-    // todoList.forEach((todo) => {
-    //   if (todo.isRecycle) {
-    //     data.recycle.push(todo)
-    //   } else if (todo.isArchive) {
-    //     data.archive.push(todo)
-    //   } else if (todo.node === 'todo') {
-    //     data.todo.push(todo)
-    //   } else if (todo.node === 'inProgress') {
-    //     data.inProgress.push(todo)
-    //   } else if (todo.node === 'testing') {
-    //     data.testing.push(todo)
-    //   } else if (todo.node === 'done') {
-    //     data.done.push(todo)
-    //   }
-    // })
     return { code: 2000, data }
   }
   /**

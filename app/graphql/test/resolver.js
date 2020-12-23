@@ -2,16 +2,16 @@ module.exports = {
   Mutation: {
     modifyRolePermission(_root, { id }) {
       return {
-        rescode: 1,
-        resmessage: [{ id }],
+        code: 1,
+        msg: [{ id }],
       }
     },
   },
   Query: {
     getPermissionList() {
       return {
-        rescode: 2,
-        resmessage: [{
+        code: 2,
+        msg: [{
           id: 1,
         }, {
           id: 2,
@@ -29,14 +29,14 @@ module.exports = {
     },
     getPermissionListForLogin() {
       return {
-        rescode: 3,
-        resmessage: 'String',
+        code: 3,
+        msg: 'String',
       }
     },
     getPermissionStateList() {
       return {
-        rescode: 4,
-        resmessage: 'String',
+        code: 4,
+        msg: 'String',
       }
     },
   },

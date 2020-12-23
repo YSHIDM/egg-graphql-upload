@@ -14,21 +14,16 @@ module.exports = class TodoNodeSvc extends Service {
   async catchError(ser, func, params = []) {
     let result = {}
     try {
-      const { code, data, message: resmessage } = await this.service[ser][func](...params)
-      let rescode = 0
-      if (code === 2000) {
-        rescode = 200
-      } else {
-        rescode = code
-      }
-      result = { rescode, resmessage, data }
+      const { code, data, msg } = await this.service[ser][func](...params)
+
+      result = { code, msg, data }
     } catch (err) {
       console.error(err)
       this.ctx.logger.error(err)
       if (err.code) {
         result = err
       }
-      result = { rescode: 500 }
+      result = { code: 500 }
     }
     return this.ctx.helper.getInfo(result)
   }

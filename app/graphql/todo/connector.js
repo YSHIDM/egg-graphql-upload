@@ -69,7 +69,7 @@ class TodoConnector {
   }
   async addTodo(){
     this.ctx.app.messenger.sendToAgent('addTodo')
-    return this.ctx.helper.getInfo({ rescode: 200 })
+    return this.ctx.helper.getInfo({ code: 2000 })
   }
 }
 module.exports = TodoConnector

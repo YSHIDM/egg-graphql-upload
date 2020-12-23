@@ -22,13 +22,13 @@ input TodoInput {
   content: String!
 }
 type ResTodo {
-  rescode: Int
-  resmessage: String
+  code: Int
+  msg: String
   data: Todo
 }
 type ResTodoList {
-  rescode: Int
-  resmessage: String
+  code: Int
+  msg: String
   data: [Todo]
 }
 

@@ -21,13 +21,13 @@ input TodoNodeInput {
   alias: String!
 }
 type ResTodoNode {
-  rescode: Int
-  resmessage: String
+  code: Int
+  msg: String
   data: TodoNode
 }
 type ResTodoNodeList {
-  rescode: Int
-  resmessage: String
+  code: Int
+  msg: String
   data: [TodoNode]
 }
 

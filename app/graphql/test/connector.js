@@ -9,8 +9,8 @@ class PermissionConnector {
    */
   async getPermissionList() {
     return {
-      rescode: 'String',
-      resmessage: 'String',
+      code: 'String',
+      msg: 'String',
     }
   }
   /**
@@ -18,8 +18,8 @@ class PermissionConnector {
    */
   async getPermissionListForLogin() {
     return {
-      rescode: 'String',
-      resmessage: 'String',
+      code: 'String',
+      msg: 'String',
     }
   }
   /**
@@ -27,8 +27,8 @@ class PermissionConnector {
    */
   async getPermissionStateList() {
     return {
-      rescode: 'String',
-      resmessage: 'String',
+      code: 'String',
+      msg: 'String',
     }
   }
   /**
@@ -36,8 +36,8 @@ class PermissionConnector {
    */
   async modifyRolePermission() {
     return {
-      rescode: 'String',
-      resmessage: 'String',
+      code: 'String',
+      msg: 'String',
     }
   }
 }

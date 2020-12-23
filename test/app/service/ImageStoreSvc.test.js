@@ -10,7 +10,7 @@ describe('get()', () => {
     // 通过 ctx 访问到 service.user
     // const imagesGroup = await ctx.service.imageStoreSvc.getGroupByDate('day', '2019-11-01', '2019-11-04', 'name', 'value')
     // assert(imagesGroup)
-    const data = await ctx.service.todoNodeSvc.deleteTodoNode()
+    const data = await ctx.service.todoSvc.getAllTodo()
     console.log(data)
   })
 
@@ -39,7 +39,7 @@ describe('get()', () => {
 
 })
 // describe('POST /', () => {
-//     it('should status 200 and get the body', () => {
+//     it('should status 2000 and get the body', () => {
 //         // 对 app 发起 `GET /` 请求
 //         app.mockCsrf();
 //         return app.httpRequest()
@@ -48,7 +48,7 @@ describe('get()', () => {
 //             // .send({
 //             //     foo: 'bar',
 //             // })
-//             .expect(200)
+//             .expect(2000)
 //             // .expect({
 //             //     foo: 'bar',
 //             // });

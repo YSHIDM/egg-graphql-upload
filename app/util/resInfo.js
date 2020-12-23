@@ -2,9 +2,9 @@
 const STATUS_CODE = require('./statusCode')
 
 module.exports = {
-  getInfo : ({rescode=0, resmessage='', data=null}) => {
-    rescode = rescode || STATUS_CODE.errCode
-    resmessage = resmessage || STATUS_CODE[rescode] || STATUS_CODE.errMsg
-    return { rescode, resmessage, data }
+  getInfo: ({ code = 0, msg = '', data = null }) => {
+    code = code || STATUS_CODE.errCode
+    msg = msg || STATUS_CODE[code] || STATUS_CODE.errMsg
+    return { code, msg, data }
   },
 }

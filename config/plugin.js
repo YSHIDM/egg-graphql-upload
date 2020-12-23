@@ -2,14 +2,6 @@
 
 /** @type Egg.EggPlugin */
 module.exports = {
-  // had enabled by egg
-  // static: {
-  //   enable: true,
-  // }
-  'apollo-server': {
-    enable: true,
-    package: 'egg-apollo-server',
-  },
   ejs: {
     enable: true,
     package: 'egg-view-ejs',
@@ -17,6 +9,15 @@ module.exports = {
   sequelize: {
     enable: true,
     package: 'egg-sequelize',
+  },
+  'apollo-server-graphql': {
+    enable: true,
+    package: 'egg-apollo-server-graphql',
+  },
+  // token生成以及验证包
+  jwt: {
+    enable: true,
+    package: 'egg-jwt',
   },
   // 跨域
   cors: {
@@ -30,5 +31,9 @@ module.exports = {
   redis: {
     enable: true,
     package: 'egg-redis',
+  },
+  validate: {
+    enable: true,
+    package: 'egg-validate',
   },
 }

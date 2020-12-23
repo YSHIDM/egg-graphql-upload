@@ -111,7 +111,7 @@ module.exports = class ImageStore extends Controller {
       await promises.unlink(image.path)
       await service.imageStoreSvc.deleteImage(id)
     }
-    ctx.body = ctx.helper.getInfo(200)
+    ctx.body = ctx.helper.getInfo(2000)
   }
   /**
    * 按外键查询
@@ -120,7 +120,7 @@ module.exports = class ImageStore extends Controller {
     const { ctx, service } = this
     const { foreignKey } = ctx.request.query
     const image = await service.imageStoreSvc.getImageByForeign({ foreignKey })
-    ctx.body = ctx.helper.getInfo(200, null, image)
+    ctx.body = ctx.helper.getInfo(2000, null, image)
   }
   /**
    * 按 id 查询
