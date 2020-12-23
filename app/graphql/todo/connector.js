@@ -50,15 +50,15 @@ class TodoConnector {
    * 废弃任务
    * @param  {...any} params 参数
    */
-  async invalidateTodo(...params) {
-    return await this.catchError('invalidateTodo', params)
+  async closeTodo(...params) {
+    return await this.catchError('closeTodo', params)
   }
   /**
    * 还原任务
    * @param  {...any} params 参数
    */
-  async todoRecycle(...params) {
-    return await this.catchError('todoRecycle', params)
+  async restoreTodo(...params) {
+    return await this.catchError('restoreTodo', params)
   }
   /**
    * 归档任务

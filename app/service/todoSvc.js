@@ -14,7 +14,7 @@ module.exports = class TodoSvc extends Service {
     obj.id = this.app['genId']('TODO')
     obj.node = 'todo'
     obj.isArchive = false
-    obj.isRecycle = false
+    obj.isClose = false
     // obj.creator = this.ctx.state.user.userId;
     return await model.create(obj).then(d => d.toJSON())
   }
@@ -127,16 +127,16 @@ module.exports = class TodoSvc extends Service {
    * 废弃任务
    * @param {string} id 任务ID
    */
-  async invalidateTodo(id){
-    const data = await this.updateTodo({ id, isRecycle: true })
+  async closeTodo(id){
+    const data = await this.updateTodo({ id, isClose: true })
     return { code: 2000, data }
   }
   /**
    * 还原任务
    * @param {string} id 任务ID
    */
-  async todoRecycle(id){
-    const data = await this.updateTodo({ id, isRecycle: false })
+  async restoreTodo(id){
+    const data = await this.updateTodo({ id, isClose: false })
     return { code: 2000, data }
   }
   /**

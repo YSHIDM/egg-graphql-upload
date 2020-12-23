@@ -14,11 +14,11 @@ module.exports = {
     todoDone(_root, { id }, ctx) {
       return ctx.connector.todo.todoDone(id)
     },
-    invalidateTodo(_root, { id }, ctx) {
-      return ctx.connector.todo.invalidateTodo(id)
+    closeTodo(_root, { id }, ctx) {
+      return ctx.connector.todo.closeTodo(id)
     },
-    todoRecycle(_root, { id }, ctx) {
-      return ctx.connector.todo.todoRecycle(id)
+    restoreTodo(_root, { id }, ctx) {
+      return ctx.connector.todo.restoreTodo(id)
     },
     todoArchive(_root, { id }, ctx) {
       return ctx.connector.todo.todoArchive(id)

@@ -28,7 +28,7 @@ module.exports = app => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    isRecycle:{
+    isClose:{
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },

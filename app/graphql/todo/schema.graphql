@@ -4,7 +4,7 @@ type Todo {
   content: String
   node: String
   isArchive: Boolean
-  isRecycle: Boolean
+  isClose: Boolean
 
   # 创建人
   creator: String
@@ -40,8 +40,8 @@ extend type Mutation{
   deleteTodoById(id: String!): ResTodo
   todoNext(id: String!): ResTodo
   todoDone(id: String!): ResTodo
-  invalidateTodo(id: String!): ResTodo
-  todoRecycle(id: String!): ResTodo
+  closeTodo(id: String!): ResTodo
+  restoreTodo(id: String!): ResTodo
   todoArchive(id: String!): ResTodo
   addTodo: NoneDataRes
 }
