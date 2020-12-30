@@ -50,7 +50,7 @@ module.exports = app => {
       }
     }
   }, {
-    tableName: 'todo_Node'
+    tableName: 'todo_node'
   })
 
   Model.byPk = async function (pk) {
