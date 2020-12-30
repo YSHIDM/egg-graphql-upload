@@ -26,6 +26,13 @@ class TodoConnector {
     return await this.catchError('getAllTodo')
   }
   /**
+   * 按 id 获取待办
+   * @param {string} id 待办 id
+   */
+  async getTodoById(id) {
+    return await this.catchError('getTodoById',[id])
+  }
+  /**
    * 按 id 删除任务
    * @param  {...any} params 参数
    */

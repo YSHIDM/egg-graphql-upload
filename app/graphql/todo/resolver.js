@@ -1,6 +1,14 @@
 'use strict'
-
+const moment = require('moment')
 module.exports = {
+  History: {
+    async title(root, _, ctx) {
+      return await ctx.connector.common.getTodoNodeTitleByName(root.node)
+    },
+    time(root) {
+      return moment(new Date(root.time)).format('YYYY-MM-DD HH:mm:ss')
+    }
+  },
   Mutation: {
     saveTodo(_root, { obj }, ctx) {
       return ctx.connector.todo.saveTodo(obj)
@@ -30,6 +38,9 @@ module.exports = {
   Query: {
     getAllTodo(_root, _, ctx) {
       return ctx.connector.todo.getAllTodo()
+    },
+    getTodoById(_root, { id }, ctx) {
+      return ctx.connector.todo.getTodoById(id)
     },
   },
 }

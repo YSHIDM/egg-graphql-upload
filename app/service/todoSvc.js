@@ -12,9 +12,13 @@ module.exports = class TodoSvc extends Service {
   async addTodo(obj) {
     const model = this.ctx.model.Todo
     obj.id = this.app['genId']('TODO')
-    obj.node = 'todo'
+    obj.node = 'plan'
     obj.isArchive = false
     obj.isClose = false
+    obj.history = [{
+      node: obj.node,
+      time: new Date(),
+    }]
     // obj.creator = this.ctx.state.user.userId;
     return await model.create(obj).then(d => d.toJSON())
   }
@@ -62,10 +66,11 @@ module.exports = class TodoSvc extends Service {
     const model = this.ctx.model.Todo
     const todoList = await model.findAll({
       where,
-      order: [['createdAt', 'DESC']]
+      order: [['updatedAt', 'DESC']]
     })
     return todoList.map(d => d.toJSON())
   }
+
   /**
    * 保存任务
    * @param {any} obj
@@ -87,6 +92,14 @@ module.exports = class TodoSvc extends Service {
     return { code: 2000, data }
   }
   /**
+   * 按 id 获取待办
+   * @param {string} id 待办 id
+   */
+  async getTodoById(id) {
+    const data = await this.byPk(id)
+    return { code: 2000, data }
+  }
+  /**
    * 按 id 删除任务
    * @param {string} id 任务 id
    */
@@ -99,17 +112,19 @@ module.exports = class TodoSvc extends Service {
    * @param {string} id 任务 id
    */
   async todoNext(id) {
-    const nextType = {
-      todo: 'inProgress',
+    const nextNode = {
+      plan: 'inProgress',
       inProgress: 'testing',
       testing: 'done',
     }
     let where = {}
     const todo = await this.byPk(id)
-    if (!nextType[todo.node]) {
+    if (!nextNode[todo.node]) {
       return { code: 8000 }
     } else {
-      where = { id, node: nextType[todo.node] }
+      const node = nextNode[todo.node]
+      todo.history.push({ node, time: new Date() })
+      where = { id, node, history: todo.history }
     }
 
     const data = await this.updateTodo(where)
@@ -120,14 +135,17 @@ module.exports = class TodoSvc extends Service {
    * @param {string} id 任务 id
    */
   async todoDone(id) {
-    const data = await this.updateTodo({ id, node: 'done' })
+    const node = 'done'
+    const todo = await this.byPk(id)
+    todo.history.push({ node, time: new Date() })
+    const data = await this.updateTodo({ id, node, history: todo.history })
     return { code: 2000, data }
   }
   /**
-   * 废弃任务
+   * 关闭任务
    * @param {string} id 任务ID
    */
-  async closeTodo(id){
+  async closeTodo(id) {
     const data = await this.updateTodo({ id, isClose: true })
     return { code: 2000, data }
   }
@@ -135,7 +153,7 @@ module.exports = class TodoSvc extends Service {
    * 还原任务
    * @param {string} id 任务ID
    */
-  async restoreTodo(id){
+  async restoreTodo(id) {
     const data = await this.updateTodo({ id, isClose: false })
     return { code: 2000, data }
   }
@@ -143,7 +161,7 @@ module.exports = class TodoSvc extends Service {
    * 归档任务
    * @param {string} id 任务ID
    */
-  async todoArchive(id){
+  async todoArchive(id) {
     const data = await this.updateTodo({ id, isArchive: true })
     return { code: 2000, data }
   }

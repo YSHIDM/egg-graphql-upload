@@ -3,41 +3,48 @@
 const moment = require('moment')
 module.exports = app => {
 
-  const DataTypes = app.Sequelize
+  const { STRING, TIME, BOOLEAN, JSON } = app.Sequelize.DataTypes
 
   const Model = app.model.define('todo', {
     id: {
-      type: DataTypes.STRING(20),
+      type: STRING(20),
       allowNull: false,
       primaryKey: true
     },
     title: {
-      type: DataTypes.STRING(50),
+      type: STRING(50),
       allowNull: false,
     },
     content: {
-      type: DataTypes.STRING(100),
+      type: STRING(100),
       allowNull: true,
     },
     // TODONode 的名字: todo,inProgress,testing,done
     node: {
-      type: DataTypes.STRING(10),
+      type: STRING(10),
       allowNull: false,
     },
+    // 是否归档
     isArchive: {
-      type: DataTypes.BOOLEAN,
+      type: BOOLEAN,
       allowNull: false,
     },
+    // 是否关闭,回收站
     isClose:{
-      type: DataTypes.BOOLEAN,
+      type: BOOLEAN,
       allowNull: false,
+    },
+    // 历史记录: [{ node, time: Date.now() }, ...]
+    history:{
+      type: JSON,
+      allowNull: false
     },
     creator: {
-      type: DataTypes.STRING(50),
+      type: STRING(50),
       allowNull: true
     },
     createdAt: {
-      type: DataTypes.TIME,
+      type: TIME,
       allowNull: true,
       field: 'created_at',
       get() {
@@ -45,11 +52,11 @@ module.exports = app => {
       }
     },
     modifier: {
-      type: DataTypes.STRING(50),
+      type: STRING(50),
       allowNull: true
     },
     updatedAt: {
-      type: DataTypes.TIME,
+      type: TIME,
       allowNull: true,
       field: 'updated_at',
       get() {

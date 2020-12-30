@@ -82,4 +82,12 @@ module.exports = class TodoNodeSvc extends Service {
     const data = await this.getTodoNodeList()
     return { code: 2000, data }
   }
+  async getAllTodoNodeMap() {
+    const data = await this.getTodoNodeList()
+    const allTodoNodeMap = new Map()
+    data.forEach(todoNode => {
+      allTodoNodeMap.set(todoNode.name, todoNode.alias || todoNode.title)
+    })
+    return allTodoNodeMap
+  }
 }

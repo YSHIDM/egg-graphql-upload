@@ -5,6 +5,7 @@ type Todo {
   node: String
   isArchive: Boolean
   isClose: Boolean
+  history: [History]
 
   # 创建人
   creator: String
@@ -14,6 +15,11 @@ type Todo {
   modifier: String
   # 修改时间
   updatedAt: Date
+}
+type History {
+  node: String
+  title: String
+  time: String
 }
 
 input TodoInput {
@@ -34,6 +40,7 @@ type ResTodoList {
 
 extend type Query {
   getAllTodo: ResTodoList
+  getTodoById(id: String!): ResTodo
 }
 extend type Mutation{
   saveTodo(obj: TodoInput!): ResTodo

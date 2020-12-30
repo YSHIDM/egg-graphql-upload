@@ -27,4 +27,29 @@ module.exports = class TodoNodeSvc extends Service {
     }
     return this.ctx.helper.getInfo(result)
   }
+  /**
+   * 捕获 DataLoader 异常统一接口
+   * @param service service 名称
+   * @param func service 方法
+   * @param params 参数数组
+   */
+  async catchDataLoaderError(service, func, params = []) {
+    let result = {}
+    try {
+      result = await this.service[service][func](...params)
+    } catch (err) {
+      console.error(err)
+      this.ctx.logger.error(err)
+      if (err.code) {
+        result = err
+      }
+      result = { code: this.STATUS_CODE.INTERNAL.RES.code }
+    }
+    return result
+  }
+  async getTodoNodeTitlesByNames(names){
+    const allTodoNodeMap = await this.service.todoNodeSvc.getAllTodoNodeMap()
+    const titles = names.map(name => allTodoNodeMap.get(name))
+    return titles
+  }
 }
