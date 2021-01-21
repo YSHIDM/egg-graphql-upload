@@ -28,11 +28,13 @@ module.exports = app => {
     isArchive: {
       type: BOOLEAN,
       allowNull: false,
+      field: 'is_archive',
     },
     // 是否关闭,回收站
     isClose:{
       type: BOOLEAN,
       allowNull: false,
+      field: 'is_close',
     },
     // 历史记录: [{ node, time: Date.now() }, ...]
     history:{

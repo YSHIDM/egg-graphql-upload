@@ -12,20 +12,27 @@
 4. 尝试修改egg-graphql 目录后，覆盖了koa-middleware-apollo 提供的接口。
 
 ## 现状
+
 1. egg-graphql提供接口路径为"/graphql"，koa-middleware-apollo 中间件提供接口路径在"/"，可以同时使用。
+
 ### 2019-11-01
+
 1. 添加restful文件上传功能及文件数据处理
 2. 添加单元测试
 
 ### 2019-11-26
+
 1. 定时器很简单
 2. socket 比较失败
+
 ## 项目使用方式
+
 ```
 npm i
 npm run dev
 npm test
 ```
+
 使用Altair 工具测试上传文件，使用方式见官方文档，填写路径 127.0.0.1:7002 访问singleUpload 接口（因为是框架测试，所以只有该接口可以正常使用）。
 填写路径 127.0.0.1:7002/graphql 访问其他接口。
 
