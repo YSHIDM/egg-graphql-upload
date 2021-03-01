@@ -1,3 +1,4 @@
 {
-  "DockerRun.DisableAutoGenerateConfig": true
+  "DockerRun.DisableAutoGenerateConfig": true,
+  "eggHelper.serverPort": 42310
 }
