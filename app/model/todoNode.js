@@ -3,7 +3,7 @@
 const moment = require('moment')
 module.exports = app => {
 
-  const { STRING, TIME } = app.Sequelize.DataTypes
+  const { STRING, INTEGER, TIME } = app.Sequelize.DataTypes
 
   const Model = app.model.define('todoNode', {
     id: {
@@ -23,6 +23,10 @@ module.exports = app => {
     alias: {
       type: STRING(10),
       allowNull: true,
+    },
+    sort: {
+      type: INTEGER,
+      allowNull: false,
     },
 
     creator: {

@@ -15,9 +15,8 @@ type TodoNode {
 }
 
 input TodoNodeInput {
-  id: ID
-  name: String
-  title: String
+  name: String!
+  title: String!
   alias: String!
 }
 type ResTodoNode {
@@ -35,5 +34,5 @@ extend type Query {
   getAllTodoNode: ResTodoNodeList
 }
 extend type Mutation{
-  saveTodoNode(obj: TodoNodeInput!): ResTodoNode
+  saveAllTodoNode(objArray: [TodoNodeInput]!): ResTodoNodeList
 }

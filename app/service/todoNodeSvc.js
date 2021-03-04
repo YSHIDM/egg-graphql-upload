@@ -15,6 +15,16 @@ module.exports = class TodoNodeSvc extends Service {
     // obj.creator = this.ctx.state.user.userId;
     return await model.create(obj).then(d => d.toJSON())
   }
+  async batchTodoNodeList(objList) {
+    const objArray = objList.map((obj, i) => {
+      obj.id = this.app['genId']('TONO')
+      obj.sort = i
+      return obj
+    })
+    const model = this.ctx.model.TodoNode
+    return await model.bulkCreate(objArray)
+      .then(data => data.map(d => d.toJSON()))
+  }
   /**
    * 修改任务
    * @param {any} obj 任务
@@ -55,24 +65,17 @@ module.exports = class TodoNodeSvc extends Service {
     })
     return todoNodeList.map(d => d.toJSON())
   }
-  // async deleteTodoNode() {
-  //   const model = this.ctx.model.TodoNode
-  //   const length = await model.destroy({ where: { id: 'TONOxjpxPXfV8a' } })
-  //   return { code: 2000, data: length }
-  // }
+  async deleteTodoNode(where = {}) {
+    const model = this.ctx.model.TodoNode
+    const length = await model.destroy({ where })
+    return { code: 2000, data: length }
+  }
 
-  /**
-   * 保存任务节点
-   * @param {any} obj
-   */
-  async saveTodoNode(obj) {
-    let todoNode = null
-    if (!obj.id) {
-      todoNode = await this.addTodoNode(obj)
-    } else {
-      todoNode = await this.updateTodoNode(obj)
-    }
-    return { code: 2000, data: todoNode }
+  async saveAllTodoNode(objList) {
+    await this.deleteTodoNode()
+    let data = await this.batchTodoNodeList(objList)
+    data = data.sort((todoNode1, todoNode2) => todoNode1.sort - todoNode2.sort)
+    return { code: 2000, data }
   }
   /**
    * 获取所有任务节点
