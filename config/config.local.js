@@ -10,7 +10,7 @@ module.exports = () => {
   config.sequelize = {
     dialect: 'postgres', // support: mysql, mariadb, postgres, mssql
     host: 'localhost',
-    port: 5434,
+    port: 5435,
     username: 'postgres',
     password: 'postgres',
     database: 'test',
