@@ -50,7 +50,7 @@
     "node": ">=12.0.0"
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-eggtest --sticky",
+    "start": "egg-scripts start --port=7001 --daemon --title=egg-server-eggtest --sticky --ignore-stderr",
     "stop": "egg-scripts stop --title=egg-server-eggtest",
     "dev": "egg-bin dev --sticky",
     "debug": "egg-bin debug",
